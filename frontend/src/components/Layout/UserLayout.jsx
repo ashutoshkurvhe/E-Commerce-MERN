@@ -1,7 +1,6 @@
+import { Outlet } from "react-router-dom"
 import Header from "../Common/Header"
 import Footer from "../Common/Footer"
-
-Header
 
 const UserLayout = () => {
     return (
@@ -10,7 +9,7 @@ const UserLayout = () => {
             <Header />
             {/* Main Content */}
             <main>
-                hello this is not good
+                <Outlet/>
             </main>
             {/* footer */}
             <Footer />
