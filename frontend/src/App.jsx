@@ -8,6 +8,9 @@ import CollectionsPage from "./pages/CollectionsPage";
 import {Toaster} from "sonner"
 import ProductDetails from "./components/Products/ProductDetails";
 import Checkout from "./components/Cart/CheckOut";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import OrderDetailsPage from "./pages/OrderDetailsPage";
+import MyOrderPage from "./pages/MyOrderPage";
 const App = () => {
   return (
     <BrowserRouter >
@@ -21,7 +24,10 @@ const App = () => {
           <Route path="profile" element={<Profile/>}/>
           <Route path="collections/:collections" element={<CollectionsPage />}/>
           <Route path="product/:id" element={<ProductDetails/>}/>
-          <Route path="checkout" element={<Checkout/>}/>
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="order-confirmation" element={<OrderConfirmationPage />} />
+          <Route path="order/:id" element={<OrderDetailsPage />} />
+          <Route path="my-orders" element={<MyOrderPage />} />
         </Route>
         <Route> {/* Admin Layout */} </Route>
       </Routes>
