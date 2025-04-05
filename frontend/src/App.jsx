@@ -6,6 +6,8 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import CollectionsPage from "./pages/CollectionsPage";
 import {Toaster} from "sonner"
+import ProductDetails from "./components/Products/ProductDetails";
+import Checkout from "./components/Cart/CheckOut";
 const App = () => {
   return (
     <BrowserRouter >
@@ -13,11 +15,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<UserLayout />} >
           {/* User Layout */}
-          <Route index element={<Home />}></Route>
-          <Route path="login" element={<Login/>}></Route>
-          <Route path="register" element={<Register/>}></Route>
-          <Route path="profile" element={<Profile/>}></Route>
-          <Route path="collections/:collections" element={<CollectionsPage/>}></Route>
+          <Route index element={<Home />}/>
+          <Route path="login" element={<Login/>}/>
+          <Route path="register" element={<Register/>}/>
+          <Route path="profile" element={<Profile/>}/>
+          <Route path="collections/:collections" element={<CollectionsPage />}/>
+          <Route path="product/:id" element={<ProductDetails/>}/>
+          <Route path="checkout" element={<Checkout/>}/>
         </Route>
         <Route> {/* Admin Layout */} </Route>
       </Routes>

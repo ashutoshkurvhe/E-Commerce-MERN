@@ -25,8 +25,10 @@ const CollectionsPage = () => {
     // Add Event linstener for click
     document.addEventListener("mousedown", handleClickOutside);
     //clean event listener
-    document.addEventListener("mousedown", handleClickOutside);
-  })
+    return () => { 
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -127,9 +129,9 @@ const CollectionsPage = () => {
       {/* Mobile Filter button */}
       <button
         onClick={toggleSidebar}
-        className="lg:hidden border p-2 flex justify-center item-center"
+        className="lg:hidden border p-2 flex justify-center items-center"
       >
-        <FaFilter className="mr-2" /> Filters
+        <FaFilter className="mr-2"/> Filters
       </button>
 
       {/* Filter Sidebar */}
@@ -137,7 +139,7 @@ const CollectionsPage = () => {
         ref={sidebarRef}
         className={`${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }fixed inset-y-0  z-50 left-0 w-64 bg-white overflow-y-auto transition-transform duration-300 lg:static lg:translate-x-0`}
+        } fixed inset-y-0  z-50 left-0 w-64 bg-white overflow-y-auto transition-transform duration-300 lg:static lg:translate-x-0`}
       >
         <FilterSidebar />
       </div>
