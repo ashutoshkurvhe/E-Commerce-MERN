@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import AdminSidebar from "./AdminSidebar";
+import { Outlet } from "react-router-dom";
+
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -19,7 +21,7 @@ const AdminLayout = () => {
         {/* Overlay for mobile sidebar */}
         {isSidebarOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"
+            className="fixed inset-0 bg-white bg-opacity-50 z-10 md:hidden"
             onClick={toggleSidebar}
           ></div>
         )}
@@ -34,6 +36,11 @@ const AdminLayout = () => {
       >
         {/* Sidebar */}
         <AdminSidebar />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-grow p-6 overflow-auto">
+        <Outlet />
       </div>
     </div>
   );

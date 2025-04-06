@@ -5,35 +5,48 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import CollectionsPage from "./pages/CollectionsPage";
-import {Toaster} from "sonner"
+import { Toaster } from "sonner";
 import ProductDetails from "./components/Products/ProductDetails";
 import Checkout from "./components/Cart/CheckOut";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
 import MyOrderPage from "./pages/MyOrderPage";
 import AdminLayout from "./components/Admin/AdminLayout";
+import AdminHomePage from "./pages/AdminHomePage";
+import UserManagement from "./components/Admin/UserManagement";
+import ProductManagement from "./components/Admin/ProductManagement";
 const App = () => {
   return (
-    <BrowserRouter >
-      <Toaster position="top-right"/>
+    <BrowserRouter>
+      <Toaster position="top-right" />
       <Routes>
-        <Route path="/" element={<UserLayout />} >
+        <Route path="/" element={<UserLayout />}>
           {/* User Layout */}
-          <Route index element={<Home />}/>
-          <Route path="login" element={<Login/>}/>
-          <Route path="register" element={<Register/>}/>
-          <Route path="profile" element={<Profile/>}/>
-          <Route path="collections/:collections" element={<CollectionsPage />}/>
-          <Route path="product/:id" element={<ProductDetails/>}/>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="profile" element={<Profile />} />
+          <Route
+            path="collections/:collections"
+            element={<CollectionsPage />}
+          />
+          <Route path="product/:id" element={<ProductDetails />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="order-confirmation" element={<OrderConfirmationPage />} />
+          <Route
+            path="order-confirmation"
+            element={<OrderConfirmationPage />}
+          />
           <Route path="order/:id" element={<OrderDetailsPage />} />
           <Route path="my-orders" element={<MyOrderPage />} />
         </Route>
-        <Route path="/admin" element={<AdminLayout/>}> {/* Admin Layout */} </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminHomePage />} />
+          <Route path="users" element={<UserManagement />} />
+          <Route path="products" element={<ProductManagement />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
 };
 
-export default App
+export default App;
