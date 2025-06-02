@@ -174,13 +174,13 @@ const productsSlice = createSlice({
               state.loading = true;
               state.error = null;
           })
-          .addCase(fetchSimilarProducts.fullfiled, (state, action) => {
+          .addCase(fetchSimilarProducts.fullfilled, (state, action) => {
               state.loading = false;
-              state.products = action.payload;
+              state.similarProducts = action.payload;
           })
           .addCase(fetchSimilarProducts.rejected, (state, action) => {
               state.loading = false;
-              state.products = action.error.message;
+              state.error = action.error.message;
           });
 
   },

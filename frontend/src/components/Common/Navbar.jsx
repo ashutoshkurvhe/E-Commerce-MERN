@@ -31,25 +31,25 @@ const Navbar = () => {
         {/* Center - navigation Links */}
         <div className="hidden md:flex space-x-6">
           <Link
-            to="/collections/all?gender/men"
+            to="/collections/all?gender=Men"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Men
           </Link>
           <Link
-            to="#"
+            to="/collections/all?gender=Women"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Women
           </Link>
           <Link
-            to="#"
+            to="/collections/all?category=Top wear"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Top Wear
           </Link>
           <Link
-            to="#"
+            to="/collections/all?category=Bottom Wear"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Bottom Wear
@@ -57,7 +57,12 @@ const Navbar = () => {
         </div>
         {/* Right - Icons */}
         <div className="flex items-center space-x-4">
-          <Link to="/admin" className="block bg-black px-3 py-1 rounded text-sm text-white">Admin</Link>
+          <Link
+            to="/admin"
+            className="block bg-black px-3 py-1 rounded text-sm text-white"
+          >
+            Admin
+          </Link>
           <Link to="/profile" className="hover:text-black">
             <HiOutlineUser className="h-6 w-6 text-gray-700" />
           </Link>
@@ -98,7 +103,7 @@ const Navbar = () => {
           <h2 className="text-xl font-semibold mb-4">Menu</h2>
           <nav className="space-y-4">
             <Link
-              to="#"
+              to="/collections/all?gender=Men"
               onClick={toggleNavDrawer}
               className="block text-gray-600 hover:text-black"
             >
@@ -106,7 +111,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="#"
+              to="/collections/all?gender=Women"
               onClick={toggleNavDrawer}
               className="block text-gray-600 hover:text-black"
             >
@@ -114,7 +119,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="#"
+              to="/collections/all?category=Top Wear"
               onClick={toggleNavDrawer}
               className="block text-gray-600 hover:text-black"
             >
@@ -122,7 +127,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="#"
+              to="/collections/all?category=Bottom Wear"
               onClick={toggleNavDrawer}
               className="block text-gray-600 hover:text-black"
             >

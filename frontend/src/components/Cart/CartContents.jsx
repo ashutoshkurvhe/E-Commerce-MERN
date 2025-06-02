@@ -1,45 +1,51 @@
 import React from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 
-const CartContents = () => {
-  const cartProduct = [
-    {
-      product: 1,
-      name: "T-shirt",
-      size: "M",
-      color: "Red",
-      quantity: 1,
-      price: 15,
-      image: "https://picsum.photos/200?random=1",
-    },
-    {
-      product: 2,
-      name: "Jeans",
-      size: "L",
-      color: "Red",
-      quantity: 1,
-      price: 15,
-      image: "https://picsum.photos/200?random=2",
-    },
-    {
-      product: 3,
-      name: "Shirt",
-      size: "M",
-      color: "Red",
-      quantity: 1,
-      price: 15,
-      image: "https://picsum.photos/200?random=3",
-    },
-    {
-      product: 3,
-      name: "Shirt",
-      size: "M",
-      color: "Red",
-      quantity: 1,
-      price: 15,
-      image: "https://picsum.photos/200?random=4",
-    },
-  ];
+const CartContents = ({ cart, userId, guestId }) => {
+  const dispatch = useDispatch();
+  // const cartProduct = [
+
+  //   {
+  //     product: 1,
+  //     name: "T-shirt",
+  //     size: "M",
+  //     color: "Red",
+  //     quantity: 1,
+  //     price: 15,
+  //     image: "https://picsum.photos/200?random=1",
+  //   },
+  //   {
+  //     product: 2,
+  //     name: "Jeans",
+  //     size: "L",
+  //     color: "Red",
+  //     quantity: 1,
+  //     price: 15,
+  //     image: "https://picsum.photos/200?random=2",
+  //   },
+  //   {
+  //     product: 3,
+  //     name: "Shirt",
+  //     size: "M",
+  //     color: "Red",
+  //     quantity: 1,
+  //     price: 15,
+  //     image: "https://picsum.photos/200?random=3",
+  //   },
+  //   {
+  //     product: 3,
+  //     name: "Shirt",
+  //     size: "M",
+  //     color: "Red",
+  //     quantity: 1,
+  //     price: 15,
+  //     image: "https://picsum.photos/200?random=4",
+  //   },
+  // ];
+
+  //Handle adding or substracting to car
+  const handleAddToCart = {product}
   return (
     <div>
       {cartProduct.map((product, index) => (
