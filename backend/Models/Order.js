@@ -73,7 +73,7 @@ const orderSchema = new mongoose.Schema({
         default: "Processing",
     },
 },
-    {timeseries: true}
+    {timestemps: true}
 );
 
 module.exports = mongoose.model("order", orderSchema);
