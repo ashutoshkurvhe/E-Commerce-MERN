@@ -1,14 +1,35 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../../../redux/slices/adminSlice";
 const UserManagement = () => {
-    const users = [
-      {
-        _id: 123456,
-        name: "John Doe",
-        email: "john@example.com",
-        role: "admin",
-      },
-    ];
+    // const users = [
+    //   {
+    //     _id: 123456,
+    //     name: "John Doe",
+    //     email: "john@example.com",
+    //     role: "admin",
+    //   },
+    // ];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const { user } = useSelector((state) => state.auth);
+  const { users, loading, error } = useSelector((state) => state.admin);
+
+  useEffect(() => {
+    if (user && user.role !== "admin") {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (user && user.role !== "admin") {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch,user]);
+
+  
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -24,8 +45,10 @@ const UserManagement = () => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("User added:", formData);
+      e.preventDefault();
+      dispatch(addUser(formData));
+
+      //Reset the form after submission
         setFormData({
             name: "",
             email: "",
@@ -34,21 +57,22 @@ const UserManagement = () => {
         });
     };
 
-    const handleRoleChange = (userId, newRole) => {
-        console.log(`User ID: ${userId}, New Role: ${newRole}`);
-        // Update the role of the user in the backend
-    }
+  const handleRoleChange = (userId, newRole) => {
+    dispatch(updateUser({ id: userId, role: newRole }));
+  };
 
-    const handleDeleteUser = (userId) => {
-        if (window.confirm("Are you sure you want to delete this user?")) {
-            console.log(`User with ID ${userId} deleted`);
-        }
-        // Delete the user from the backend
+  const handleDeleteUser = (userId) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      dispatch(deleteUser(userId));
     }
+    // Delete the user from the backend
+  };
 
     return (
       <div className="max-w-7xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-4">User Management</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
         <div className="p-6 rounded-lg mb-6">
           <h3 className="text-lg font-bold mb-4">Add New User</h3>
           <form onSubmit={handleSubmit}>

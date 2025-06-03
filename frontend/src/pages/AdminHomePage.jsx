@@ -96,7 +96,7 @@ const AdminHomePage = () => {
                                   <tr key={order._id} className="border-b hover:bg-gray50 cursor-pointer">
                                       <td className="p-4">{order._id}</td>
                                       <td className="p-4">{order.user.name}</td>
-                                      <td className="p-4">{order.totalPrice.to}</td>
+                                      <td className="p-4">{order.totalPrice.toFixed()}</td>
                                       <td className="p-4">{order.status}</td>
                                       <td className="p-4"></td>
                                   </tr>

@@ -6,10 +6,14 @@ import {
   FaSignOutAlt,
   FaStore,
 } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearCart());
     navigate("/");
   };
   return (
