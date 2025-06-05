@@ -32,7 +32,7 @@ const checkoutItemSchema = new mongoose.Schema({
 const checkoutSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
+        ref: "User",
         required: true,
     },
 
@@ -60,7 +60,11 @@ const checkoutSchema = new mongoose.Schema({
         type: Date,
     },
     paymentStatus: {
-        type: mongoose.Schema.Types.Mixed, // store payment-related details(transaction ID, paypal response)
+        type: String,
+        default: "Pending",
+    },
+    paymentDetails: {
+        type: mongoose.Schema.Types.Mixed, // To store payment related details transaction ID, paypal response)
     },
     isFinalized: {
         type: Boolean,

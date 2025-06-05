@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
       }
       // Recalculate the total price
       cart.totalPrice = cart.products.reduce(
-        (acc, iten) => acc + ClipboardItem.price * item.quantity,
+        (acc, item) => acc + item.price * item.quantity,
         0
       );
       await cart.save();
@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
             guestId: guestId ? guestId : "guest_" + new Date().getTime(), products: [{
                 productId,
                 name: product.name,
-                image: product.images[0].usl,
+                image: product.images[0].url,
                 price: product.price,
                 size,
                 color,
@@ -188,7 +188,7 @@ router.post("/merge", protect, async (req, res) => {
                     const productIndex = userCart.products.findIndex((item) => item.productId.toString() == guestItem.productId.toString() && item.size === guestItem.size && item.color === guestItem.color
                     );
 
-                    if (productindex > -1) {
+                    if (productIndex > -1) {
                         //If the items exists in user cart, update the quality
                         userCart.products[productIndex].quantity += guestItem.quantity;
                     } else {

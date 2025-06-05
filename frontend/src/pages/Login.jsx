@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../assets/login.webp";
 import { loginUser } from "../../redux/slices/authSlice";
-import {useDispatch, userDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 
 const Login = () => {
   const [email, setEmail] = React.useState("");

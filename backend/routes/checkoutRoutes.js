@@ -10,7 +10,7 @@ const router = express.Router()
 //route POST /api/checkout
 // @desc Create a new checkout session
 //@access Private
-Router.post("/", protect, async (req, res) => {
+router.post("/", protect, async (req, res) => {
     const { checkoutItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
     if (!checkoutItems || checkoutItems.length === 0) {
@@ -19,7 +19,7 @@ Router.post("/", protect, async (req, res) => {
 
     try {
         //Create a new checkout session
-        const newCheckout = await Checkout.createIndexes({
+        const newCheckout = await Checkout.create({
             user: req.user._id,
             checkoutItems: checkoutItems,
             shippingAddress,
@@ -49,7 +49,7 @@ router.put("/:id/pay", protect, async (req, res) => {
             return res.status(404).json({ message: "Checkout not found" });
         }
 
-        if (paymentStatus == "paid") {
+        if (paymentStatus === "paid") {
             checkout.isPaid = true;
             checkout.paymentStatus = paymentStatus;
             checkout.paymentDetails = paymentDetails;
@@ -82,17 +82,19 @@ router.post("/:id/finalize", protect, async (req, res) => {
             // Create final orderbased on the checkout details
             const finalOrder = await Order.create({
                 user: checkout.user,
-                orderItems: checkout.checkoutItems,
-                shippingAddress: checkout.paymentMethod,
+                orderItems: checkout.orderItems,
+                shippingAddress: checkout.shippingAddress,
+                paymentMethod: checkout.paymentMethod,  
                 totalPrice: checkout.totalPrice,
                 isPaid: true,
                 paidAt: checkout.paidAt,
+                isDeliverd: false,
                 paymentStatus: "paid",
                 paymentDetails: checkout.paymentDetails,
             });
 
             //Mark the checkout as finalized
-            checkout.isFinalized = trusted;
+            checkout.isFinalized = true;
             checkout.finalizedAt = Date.now();
             await checkout.save();
             //Delete the cart associated with the user

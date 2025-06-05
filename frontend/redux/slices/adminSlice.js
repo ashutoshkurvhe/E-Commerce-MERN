@@ -7,7 +7,7 @@ export const fetchUsers = createAsyncThunk("orders/fetchUser", async () => {
     `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
     {
       headers: {
-        Authorization: `BEARER ${localStorage.getItem("userToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
     }
   );
@@ -97,7 +97,7 @@ const adminSlice = createSlice({
               (user) => user._id === updatedUser._id
           );
           if (userIndex !== -1) {
-              state.users[userIndex] = updateUser
+              state.users[userIndex] = updatedUser
           }
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
@@ -111,7 +111,7 @@ const adminSlice = createSlice({
         state.loading = false;
         state.users.push(action.payload.user) //add a new user to the state
       })
-      .addCase(addUser.pending, (state, action) => {
+      .addCase(addUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message; 
       })

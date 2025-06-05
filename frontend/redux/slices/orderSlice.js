@@ -9,7 +9,7 @@ export const fetchUserOrders = createAsyncThunk(
         `${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`,
         {
           headers: {
-            Authorization: `BEARER ${localStorage.getItem("userToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         }
       );
@@ -26,7 +26,7 @@ export const fetchOrderDetails = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `S{import.meta.env.VITE_Backend_URL}/api/orders/${orderId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`,
         {
           headers: {
             Authrization: `Bearer ${localStorage.getItem("userToken")}`,

@@ -113,6 +113,12 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.dimensions = dimensions || product.dimensions;
       product.weight = weight || product.weight;
       product.sku = sku || product.sku;
+
+      //Save the updated product
+      const updatedProduct = await product.save();
+      res.json(updatedProduct);
+    } else {
+      res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
     console.error(error);
@@ -209,6 +215,7 @@ router.get("/", async (req, res) => {
 
     //Fatch products and apply sorting and limit
     let products = await Product.find(query).sort(sort).limit(Number(limit) || 0);
+    res.json(products);
   } catch (error) {
     console.log(error);
     res.status(500).send("server Error")

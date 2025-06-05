@@ -30,7 +30,7 @@ const orderItemSchema = new mongoose.Schema({
 
 const orderSchema = new mongoose.Schema({
     user: {
-        type: mongoose.schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
     },
@@ -56,7 +56,7 @@ const orderSchema = new mongoose.Schema({
     paidAt: {
         type: Date,
     },
-    isDeliverd: {
+    isDelivered: {
         type: Boolean,
         default: false,
     },

@@ -3,7 +3,7 @@ import axios from "axios";
 
 //Async Thunk to Fetch Products by Collection and optical Filters
 export const fetchProductsByFilters = createAsyncThunk(
-  "Products/fetchByFilters",
+  "products/fetchByFilters",
   async ({
     collection,
     size,
@@ -63,6 +63,7 @@ export const updateProduct = createAsyncThunk(
         },
       }
     );
+    return response.data;
   }
 );
 
@@ -101,7 +102,7 @@ const productsSlice = createSlice({
   },
   reducers: {
     setFilters: (state, action) => {
-      state.filters = { ...state.filtrs, ...action.payload };
+      state.filters = { ...state.filters, ...action.payload };
     },
     clearFilters: (state) => {
       state.filters = {
@@ -126,7 +127,7 @@ const productsSlice = createSlice({
               state.loading = true;
               state.error = null;
           })
-          .addCase(fetchProductsByFilters.fullfiled, (state, action) => {
+          .addCase(fetchProductsByFilters.fulfilled, (state, action) => {
               state.loading = false;
               state.products = Array.isArray(action.payload) ? action.payload : [];
           })
@@ -141,7 +142,7 @@ const productsSlice = createSlice({
               state.loading = true;
               state.error = null;
           })
-          .addCase(fetchProductDetails.fullfiled, (state, action) => {
+          .addCase(fetchProductDetails.fulfilled, (state, action) => {
               state.loading = false;
               state.products = action.payload;
           })
@@ -156,14 +157,14 @@ const productsSlice = createSlice({
               state.loading = true;
               state.error = null;
           })
-          .addCase(updateProduct.fullfiled, (state, action) => {
+          .addCase(updateProduct.fulfilled, (state, action) => {
               state.loading = false;
-              const updateProduct = action.payload;
+              const updatedProduct = action.payload;
               const index = state.products.findIndex(
                   (product) => product._id === updateProduct._id
               );
               if (index !== -1) {
-                  state.products[index] = updateProduct;
+                  state.products[index] = updatedProduct;
               }
           })
           .addCase(updateProduct.rejected, (state, action) => {
@@ -174,7 +175,7 @@ const productsSlice = createSlice({
               state.loading = true;
               state.error = null;
           })
-          .addCase(fetchSimilarProducts.fullfilled, (state, action) => {
+          .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
               state.loading = false;
               state.similarProducts = action.payload;
           })
