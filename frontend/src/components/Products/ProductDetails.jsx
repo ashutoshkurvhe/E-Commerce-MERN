@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import ProductGrid from "./ProductGrid";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchProductDetails,
+  fetchSimilarProducts,
+} from "../../../redux/slices/productsSlice";
+import { addToCart } from "../../../redux/slices/CartSlice";
 // const selectedProduct = {
 //   name: "Stylish jacket",
 //   price: 120,
@@ -64,13 +68,14 @@ import { useDispatch } from "react-redux";
 //     }
 // ]
 
-
 const ProductDetails = ({ productId }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { selectedProduct, loading, error, similarProducts } = useSelector((state) => state.products);
+  const { selectedProduct, loading, error, similarProducts } = useSelector(
+    (state) => state.products
+  );
   const { user, guestId } = useSelector((state) => state.auth);
-  const [mainImage, setMainImage] = useState(selectedProduct.images[0].url);
+  const [mainImage, setMainImage] = useState("");
   const [seLectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -81,12 +86,11 @@ const ProductDetails = ({ productId }) => {
   useEffect(() => {
     if (productFetchId) {
       dispatch(fetchProductDetails(productFetchId));
-      dispatch(fetchSimilarProducts({ id: productFetchId }))
+      dispatch(fetchSimilarProducts({ id: productFetchId }));
     }
-  },[dispatch, productFetchId]);
-
+  }, [dispatch, productFetchId]);
   useEffect(() => {
-    if (selectedProduct?.images?.legth > 0) {
+    if (selectedProduct?.images?.[0]?.url) {
       setMainImage(selectedProduct.images[0].url);
     }
   }, [selectedProduct]);
@@ -105,29 +109,43 @@ const ProductDetails = ({ productId }) => {
     }
     setIsButtonDisabled(true);
 
-    dispatch(addToCart({
-      productId: productFetchId,
-      quantity,
-      size: selectedColor,
-      guestId,
-      userId: user?._id,
-    })
-    ).then(() => {
-      toast.success("Product added to cart!", {
-        duration: 1000,
+    dispatch(
+      addToCart({
+        productId: productFetchId,
+        quantity,
+        size: selectedColor,
+        guestId,
+        userId: user?._id,
+      })
+    )
+      .then(() => {
+        toast.success("Product added to cart!", {
+          duration: 1000,
+        });
+      })
+      .finally(() => {
+        setIsButtonDisabled(false);
       });
-    }).finally(() => {
-      setIsButtonDisabled(false);
-    });
 
     if (loading) {
-      return <p>Loading...</p>
+      return <p>Loading...</p>;
     }
 
     if (error) {
-      return <p>Error: {error}</p>
+      return <p>Error: {error}</p>;
     }
   };
+  if (loading) {
+    return <div className="p-6">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="p-6">Error: {error}</div>;
+  }
+
+  if (!selectedProduct) {
+    return <div className="p-6">No product found</div>;
+  }
 
   return (
     <div className="p-6">
@@ -282,7 +300,11 @@ const ProductDetails = ({ productId }) => {
             <h2 className="text2xl text-center font-medium mb-4">
               You May Also Like
             </h2>
-            <ProductGrid products={similarProducts} loading={loading} error={error} />
+            <ProductGrid
+              products={similarProducts}
+              loading={loading}
+              error={error}
+            />
           </div>
         </div>
       )}

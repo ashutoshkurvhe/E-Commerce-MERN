@@ -74,7 +74,7 @@ const checkoutSchema = new mongoose.Schema({
         type: Date,
     },
 },
-    { timestamps: ture }
+    { timestamps: true }
 );
 
 module.exports = mongoose.model("Checkout", checkoutSchema);

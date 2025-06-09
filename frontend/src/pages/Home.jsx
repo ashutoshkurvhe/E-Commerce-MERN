@@ -6,7 +6,9 @@ import ProductGrid from "../components/Products/ProductGrid";
 import FeaturedCollection from "../components/Products/FeaturedCollection";
 import FeaturesSectio from "../components/Products/FeatureSection";
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchProductsByFilters } from "../../redux/slices/productsSlice";
+import axios from "axios";
 
 // const placeholderProducts = [
 //   {

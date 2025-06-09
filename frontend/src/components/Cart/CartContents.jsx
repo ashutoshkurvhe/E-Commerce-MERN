@@ -4,45 +4,14 @@ import { useDispatch } from "react-redux";
 
 const CartContents = ({ cart, userId, guestId }) => {
   const dispatch = useDispatch();
-  // const cartProduct = [
 
-  //   {
-  //     product: 1,
-  //     name: "T-shirt",
-  //     size: "M",
-  //     color: "Red",
-  //     quantity: 1,
-  //     price: 15,
-  //     image: "https://picsum.photos/200?random=1",
-  //   },
-  //   {
-  //     product: 2,
-  //     name: "Jeans",
-  //     size: "L",
-  //     color: "Red",
-  //     quantity: 1,
-  //     price: 15,
-  //     image: "https://picsum.photos/200?random=2",
-  //   },
-  //   {
-  //     product: 3,
-  //     name: "Shirt",
-  //     size: "M",
-  //     color: "Red",
-  //     quantity: 1,
-  //     price: 15,
-  //     image: "https://picsum.photos/200?random=3",
-  //   },
-  //   {
-  //     product: 3,
-  //     name: "Shirt",
-  //     size: "M",
-  //     color: "Red",
-  //     quantity: 1,
-  //     price: 15,
-  //     image: "https://picsum.photos/200?random=4",
-  //   },
-  // ];
+  if (!cart || !cart.products) {
+    return (
+      <div className="text-center py-8">
+        <p>Your cart is empty or still loading...</p>
+      </div>
+    );
+  }
 
   //Handle adding or substracting to car
   const handleAddToCart = (productId, delta, quantity, size, color) => {
@@ -117,7 +86,11 @@ const CartContents = ({ cart, userId, guestId }) => {
             </div>
             <div>
               <p>${product.price.toLocaleString()}</p>
-              <button onClick={()=> handleRemoveFromCart(product.productId, product.size, product.color)}>
+              <button
+                onClick={() =>
+                  handleRemoveFromCart(product.productId, product.size, product.color)
+                }
+              >
                 <RiDeleteBinLine className="h-6 w-6 mt-2 text-gray-600" />
               </button>
             </div>

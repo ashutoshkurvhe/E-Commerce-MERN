@@ -22,14 +22,13 @@ const cartSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-    },
-    guestId: {
-        typr: String,
+    },    guestId: {
+        type: String,
     },
     products: [cartItemSchema],
     totalPrice: {
-        typr: Number,
-        requires: true,
+        type: Number,
+        required: true,
         default: 0,
     },
 },

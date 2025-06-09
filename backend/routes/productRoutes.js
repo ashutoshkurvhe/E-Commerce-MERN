@@ -88,7 +88,7 @@ router.put("/:id", protect, admin, async (req, res) => {
       weight,
       sku,
     } = req.body;
-    
+
     //Find Product by ID
 
     const product = await Product.findById(req.params.id);
@@ -107,8 +107,10 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.material = material || product.material;
       product.gender = gender || product.gender;
       product.images = images || product.images;
-      product.isFeatured = isFeatured !== undefined ? isFeatured : product.isFeatured;
-      product.isPublished = isPublished !== undefined ? isPublished : product.isPublished;
+      product.isFeatured =
+        isFeatured !== undefined ? isFeatured : product.isFeatured;
+      product.isPublished =
+        isPublished !== undefined ? isPublished : product.isPublished;
       product.tags = tags || product.tags;
       product.dimensions = dimensions || product.dimensions;
       product.weight = weight || product.weight;
@@ -122,7 +124,7 @@ router.put("/:id", protect, admin, async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error")
+    res.status(500).send("Server Error");
   }
 });
 
@@ -142,7 +144,7 @@ router.delete("/:id", protect, admin, async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error")
+    res.status(500).send("Server Error");
   }
 });
 
@@ -152,10 +154,23 @@ router.delete("/:id", protect, admin, async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const { collection, size, color, gender, minPrice, maxPrice, sortBy, search, category, material, brand, limit } = req.query;
+    const {
+      collection,
+      size,
+      color,
+      gender,
+      minPrice,
+      maxPrice,
+      sortBy,
+      search,
+      category,
+      material,
+      brand,
+      limit,
+    } = req.query;
     let query = {};
 
-    //Filter logic 
+    //Filter logic
     if (collection && collection.toLocalLowerCase() !== "all") {
       query.collections = collection;
     }
@@ -171,27 +186,25 @@ router.get("/", async (req, res) => {
       query.brand = { $in: brand.split(",") };
     }
     if (size) {
-      query.size = { $in: size.split(",") };
+      query.sizes = { $in: size.split(",") };
     }
 
     if (color) {
       query.colors = { $in: [color] };
     }
- 
+
     if (gender) {
       query.gender = gender;
     }
-
     if (minPrice || maxPrice) {
       query.price = {};
       if (minPrice) query.price.$gte = Number(minPrice);
-      if (minPrice) query.price.$lte = Number(maxPrice);
+      if (maxPrice) query.price.$lte = Number(maxPrice);
     }
-
     if (search) {
       query.$or = [
-        { name: { $reqex: search, $options: "i" } },
-        { description: { $reqex: search, $options: "i" } }
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
       ];
     }
 
@@ -214,11 +227,13 @@ router.get("/", async (req, res) => {
     }
 
     //Fatch products and apply sorting and limit
-    let products = await Product.find(query).sort(sort).limit(Number(limit) || 0);
+    let products = await Product.find(query)
+      .sort(sort)
+      .limit(Number(limit) || 0);
     res.json(products);
   } catch (error) {
     console.log(error);
-    res.status(500).send("server Error")
+    res.status(500).send("server Error");
   }
 });
 
@@ -258,7 +273,7 @@ router.get("/new-arrivals", async (req, res) => {
 //@access Public
 router.get("/:id", async (req, res) => {
   try {
-    const product = await Product.findById(req, params.id);
+    const product = await Product.findById(req.params.id);
     if (product) {
       res.json(product);
     } else {
@@ -277,14 +292,14 @@ router.get("/:id", async (req, res) => {
 router.get("/similar/:id", async (req, res) => {
   const { id } = req.params;
   // console.log(id)
-  
+
   try {
     const product = await Product.findById(id);
-    
+
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    
+
     const similarProducts = await Product.find({
       _id: { $ne: id }, //Execute the current product ID
       gender: product.gender,
@@ -298,8 +313,4 @@ router.get("/similar/:id", async (req, res) => {
   }
 });
 
-
-  
 module.exports = router;
-
-
