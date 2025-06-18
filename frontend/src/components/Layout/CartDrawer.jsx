@@ -9,7 +9,7 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
   const { cart } = useSelector((state) => state.cart);
   const userId = user ? user._id : null;
 
-  const handleCheckout = () => { 
+  const handleCheckout = () => {
     toggleCartDrawer();
     if (!user) {
       navigate("/login?redirect=checkout");
@@ -45,8 +45,9 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
         {/* Checkout button fixed at the bottom */}
 
         <div className="p-4 bg-white sticky bottom-0">
+          {" "}
           {cart && cart?.products?.length > 0 && (
-            <p>
+            <div>
               <button
                 onClick={handleCheckout}
                 className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
@@ -56,7 +57,7 @@ const CartDrawer = ({ drawerOpen, toggleCartDrawer }) => {
               <p className="text-sm tracking-tighter text-gray-500 mt-2 text-center">
                 Shipping, texes, and discount codes calculated at checkout.
               </p>
-            </p>
+            </div>
           )}
         </div>
       </div>

@@ -11,7 +11,7 @@ export const createCheckout = createAsyncThunk(
         checkoutdata,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         }
       );
@@ -29,22 +29,22 @@ const checkoutSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducer: {},
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(createCheckout.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    })
-    .addCase(createCheckout.fulfilled, (state, action) => {
-      state.loading = false;
-      state.checkout = action.payload;
-    })
-    .addCase(createCheckout.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload.message;
-    });
+    builder
+      .addCase(createCheckout.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createCheckout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.checkout = action.payload;
+      })
+      .addCase(createCheckout.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || "Checkout creation failed";
+      });
   },
 });
-
 
 export default checkoutSlice.reducer;

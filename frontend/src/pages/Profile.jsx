@@ -2,6 +2,7 @@ import MyOrderPage from "./MyOrderPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { logout } from "../../redux/slices/authSlice";
 const Profile = () => {
     const { user } = useSelector((state) => state.auth);
     const navigate = useNavigate();

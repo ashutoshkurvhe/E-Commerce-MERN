@@ -68,7 +68,7 @@ const FilterSidebar = () => {
       material: params.material ? params.material.split(",") : [],
       brand: params.brand ? params.brand.split(",") : [],
       minPrice: params.minPrice || 0,
-      minPrice: params.minPrice || 100,
+      maxPrice: params.maxPrice || 100,
     });
     setPriceRange([0, params.maxPrice || 100]);
   }, [searchParams]);

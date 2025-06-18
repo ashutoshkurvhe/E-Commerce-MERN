@@ -1,6 +1,8 @@
 import React from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../../redux/slices/CartSlice";
+import { updateCartItemQuantity } from "../../../redux/slices/CartSlice";
 
 const CartContents = ({ cart, userId, guestId }) => {
   const dispatch = useDispatch();

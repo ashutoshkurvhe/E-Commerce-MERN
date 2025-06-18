@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { fetchUserOrders } from "../../redux/slices/orderSlice";
 const MyOrderPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { orders, loading, error } = useSelector((state) => state.orders);
+  const { orders, loading, error } = useSelector((state) => state.order);
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -46,12 +48,12 @@ const MyOrderPage = () => {
     dispatch(fetchUserOrders());
   }, [dispatch]);
 
-  const handleRowClick = (orderId) => { 
+  const handleRowClick = (orderId) => {
     navigate(`/order/${orderId}`);
-  }
+  };
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6">
       <h2 className="text-xl sm:text-2xl font-bold mb-6">My Orders</h2>

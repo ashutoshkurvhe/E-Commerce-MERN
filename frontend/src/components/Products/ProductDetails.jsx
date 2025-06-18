@@ -82,11 +82,10 @@ const ProductDetails = ({ productId }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const productFetchId = productId || id;
-
   useEffect(() => {
     if (productFetchId) {
       dispatch(fetchProductDetails(productFetchId));
-      dispatch(fetchSimilarProducts({ id: productFetchId }));
+      dispatch(fetchSimilarProducts(productFetchId));
     }
   }, [dispatch, productFetchId]);
   useEffect(() => {
@@ -172,11 +171,13 @@ const ProductDetails = ({ productId }) => {
             {/* Main Image*/}
             <div className="md:w-1/2">
               <div className="mb-4">
-                <img
-                  src={mainImage}
-                  alt="Main Product"
-                  clssname="w-full h-auto object-cover rounded-lg"
-                />
+                {mainImage && (
+                  <img
+                    src={mainImage}
+                    alt="Main Product"
+                    className="w-full h-auto object-cover rounded-lg"
+                  />
+                )}
               </div>
             </div>
             {/* Mobile Thumnail*/}

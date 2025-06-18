@@ -4,7 +4,8 @@ import register from "../assets/register.webp";
 import { registerUser } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import mergeCart from "../../redux/slices/CartSlice";
+import { mergeCart } from "../../redux/slices/CartSlice";
+import { useEffect } from "react";
 
 const Register = () => {
   const [name, setName] = React.useState("");
@@ -22,18 +23,22 @@ const Register = () => {
 
   useEffect(() => {
     if (user) {
-      if (cart?.products.length > 0 && guestId) {
-        dispatch(mergeCart({ guestId, user })).then(() => {});
+      if (cart?.products?.length > 0 && guestId) {
+        dispatch(mergeCart({ guestId, user }));
       } else {
         navigate(isCheckoutRedirect ? "/checkout" : "/");
       }
     }
   }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(registerUser({ name, email, password }));
-    // Add your registration logic here
+    try {
+      await dispatch(registerUser({ name, email, password })).unwrap();
+      // Registration successful, redirect will happen via the useEffect above
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
@@ -94,7 +99,10 @@ const Register = () => {
           </button>
           <p className="mt-6 text-center text-sm">
             Don't have an account?
-            <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500">
+            <Link
+              to={`/login?redirect=${encodeURIComponent(redirect)}`}
+              className="text-blue-500"
+            >
               Login
             </Link>
           </p>

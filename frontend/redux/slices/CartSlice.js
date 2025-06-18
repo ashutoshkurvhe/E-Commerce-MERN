@@ -18,7 +18,7 @@ export const fetchCart = createAsyncThunk(
   async ({ userId, guestId }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL/api/cart}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         {
           params: { userId, guestId },
         }
@@ -86,7 +86,7 @@ export const updateCartItemQuantity = createAsyncThunk(
 //Remove an item from the cart
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
-  async ({ productId, guestId,userId,size,color }, { rejectWithValue }) => {
+  async ({ productId, guestId, userId, size, color }, { rejectWithValue }) => {
     try {
       const response = await axios({
         method: "DELETE",
@@ -173,7 +173,8 @@ const cartSlice = createSlice({
       })
       .addCase(updateCartItemQuantity.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message || "Failed to update item quantity";
+        state.error =
+          action.payload?.message || "Failed to update item quantity";
       })
       .addCase(removeFromCart.pending, (state) => {
         state.loading = true;
@@ -203,7 +204,6 @@ const cartSlice = createSlice({
       });
   },
 });
-
 
 export const { clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

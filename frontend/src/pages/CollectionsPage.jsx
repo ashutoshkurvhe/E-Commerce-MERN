@@ -7,24 +7,30 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFilters } from "../../redux/slices/productsSlice";
 
+
 const CollectionsPage = () => {
   const { collection } = useParams();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
   const queryParams = Object.fromEntries([...searchParams]);
-
   const sidebarRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
+
+ 
+//collection page will fetch products based on collection and query params
   useEffect(() => {
     dispatch(fetchProductsByFilters({ collection, ...queryParams }));
-  })
+  }, [dispatch, collection, queryParams]); // Added dependency array
 
+
+  // This function toggles the sidebar open and close state
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  // This function handles clicks outside the sidebar to close it
   const handleClickOutside = (event) => {
     //Close sidebar if clicked outside
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) { 
@@ -33,6 +39,7 @@ const CollectionsPage = () => {
     }
   }
 
+  // useEffect to add event listener for clicks outside the sidebar
   useEffect(() => {
     // Add Event linstener for click
     document.addEventListener("mousedown", handleClickOutside);
@@ -42,100 +49,7 @@ const CollectionsPage = () => {
     }
   }, [])
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const fetchedProducts = [
-  //       {
-  //         _id: "1",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=1",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "2",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=2",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "3",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=3",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "4",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=4",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "5",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=5",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "6",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=6",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "7",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=7",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         _id: "8",
-  //         name: "Stylish Jacket",
-  //         price: 120,
-  //         images: [
-  //           {
-  //             url: "https://picsum.photos/500/500?random=8",
-  //             altText: "Stylish-Jacket",
-  //           },
-  //         ],
-  //       },
-  //     ];setProducts(fetchedProducts);
-  //   },1000)
-  // }, []);
+ 
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Mobile Filter button */}

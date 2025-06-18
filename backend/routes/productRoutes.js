@@ -169,14 +169,14 @@ router.get("/", async (req, res) => {
       limit,
     } = req.query;
     let query = {};
-
+    
     //Filter logic
-    if (collection && collection.toLocalLowerCase() !== "all") {
-      query.collections = collection;
+    if (collection && collection.toLowerCase() !== "all") {
+      query.collections = new RegExp(collection, "i");
     }
-
-    if (category && category.toLocalLowerCase() !== "all") {
-      query.category = category;
+    if (category && category.toLowerCase() !== "all") {
+      // Make category search case-insensitive using regex
+      query.category = new RegExp(category, "i");
     }
 
     if (material) {
@@ -194,7 +194,8 @@ router.get("/", async (req, res) => {
     }
 
     if (gender) {
-      query.gender = gender;
+      // Make gender search case-insensitive
+      query.gender = new RegExp(`^${gender}$`, "i");
     }
     if (minPrice || maxPrice) {
       query.price = {};
@@ -238,7 +239,7 @@ router.get("/", async (req, res) => {
 });
 
 //@route GET /api/products/best-seller
-//@desc Retrive the rpoduct with highest rating
+//@desc Retrieve the product with highest rating
 //@access Public
 router.get("/best-seller", async (req, res) => {
   try {
@@ -259,8 +260,7 @@ router.get("/best-seller", async (req, res) => {
 //@access Public
 router.get("/new-arrivals", async (req, res) => {
   try {
-    //Fetch latest 8 products
-    const newArrivals = await Product.find().sort({ createAt: -1 }).limit(8);
+    const newArrivals = await Product.find().sort({ createdAt: -1 }).limit(8);
     res.json(newArrivals);
   } catch (error) {
     console.error(error);
@@ -286,12 +286,10 @@ router.get("/:id", async (req, res) => {
 });
 
 //@route GET /api/products/similar/:id
-//@desc Retrive similar products based on the current product's gender and category
+//@desc Retrieve similar products based on the current product's gender and category
 //@access Public
-
 router.get("/similar/:id", async (req, res) => {
   const { id } = req.params;
-  // console.log(id)
 
   try {
     const product = await Product.findById(id);
@@ -301,7 +299,7 @@ router.get("/similar/:id", async (req, res) => {
     }
 
     const similarProducts = await Product.find({
-      _id: { $ne: id }, //Execute the current product ID
+      _id: { $ne: id }, // Exclude the current product
       gender: product.gender,
       category: product.category,
     }).limit(4);

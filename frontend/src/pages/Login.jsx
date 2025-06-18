@@ -2,7 +2,9 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../assets/login.webp";
 import { loginUser } from "../../redux/slices/authSlice";
-import {useDispatch} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { mergeCart } from "../../redux/slices/CartSlice";
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
