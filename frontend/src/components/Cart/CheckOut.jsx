@@ -42,7 +42,7 @@ const CheckOut = () => {
 
   useEffect(() => {
     if (!cart || !cart.products || cart.products.length === 0) {
-      navigate("/");
+      navigate("/")
     }
   }, [cart, navigate]);
 
