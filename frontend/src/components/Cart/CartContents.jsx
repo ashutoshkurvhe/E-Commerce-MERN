@@ -10,7 +10,7 @@ const CartContents = ({ cart, userId, guestId }) => {
   if (!cart || !cart.products) {
     return (
       <div className="text-center py-8">
-        <p>Your cart is empty or still loading...</p>
+        <p>Your Cart Is Empty or Still Loading...</p>
       </div>
     );
   }
