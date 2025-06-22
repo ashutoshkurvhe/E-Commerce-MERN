@@ -56,7 +56,7 @@ router.put("/:id", protect, admin, async (req, res) => {
             user.role = req.body.role || user.role;
         }
         const updatedUser = await user.save();
-        res.json({ mesage: "User updated successfully", user: updatedUser });
+        res.json({ message: "User updated successfully", user: updatedUser });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server Error" });

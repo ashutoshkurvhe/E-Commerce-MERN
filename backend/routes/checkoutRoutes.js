@@ -1,7 +1,6 @@
 const express = require("express");
 const Checkout = require("../Models/Checkout"); 
 const Cart = require("../Models/Cart"); 
-const Product = require("../Models/Product"); 
 const Order = require("../Models/Order"); 
 const { protect } = require("../middleware/authMiddleware");
 
@@ -14,7 +13,7 @@ router.post("/", protect, async (req, res) => {
     const { checkoutItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
     if (!checkoutItems || checkoutItems.length === 0) {
-        return res.status(400).json({ message: "no items in checoutk" });
+        return res.status(400).json({ message: "no items in checkout" });
     }
 
     try {
@@ -38,7 +37,7 @@ router.post("/", protect, async (req, res) => {
 
 //@route PUT /api/checkout/:id/pay
 //@desc update checkout to mask as paid after successful payment
-//@access Peivate
+//@access Private
 router.put("/:id/pay", protect, async (req, res) => {
     const { paymentStatus, paymentDetails } = req.body;
 
@@ -58,7 +57,7 @@ router.put("/:id/pay", protect, async (req, res) => {
 
             res.status(200).json(checkout);
         } else {
-            res.status(200).json({message: "Invalid Payment Status"});
+            res.status(400).json({message: "Invalid Payment Status"});
         }
     } catch (error) {
         console.error(error);
@@ -82,7 +81,7 @@ router.post("/:id/finalize", protect, async (req, res) => {
             // Create final orderbased on the checkout details
             const finalOrder = await Order.create({
                 user: checkout.user,
-                orderItems: checkout.orderItems,
+                orderItems: checkout.checkoutItems,
                 shippingAddress: checkout.shippingAddress,
                 paymentMethod: checkout.paymentMethod,  
                 totalPrice: checkout.totalPrice,

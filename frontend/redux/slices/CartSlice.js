@@ -128,9 +128,11 @@ const cartSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducres: {
+  reducers: {
     clearCart: (state) => {
       state.cart = { products: [] };
+      state.error = null;
+      state.loading = false;
       localStorage.removeItem("cart");
     },
   },
@@ -147,7 +149,7 @@ const cartSlice = createSlice({
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch cart";
+        state.error = action.payload?.message || "Failed to fetch cart";
       })
       .addCase(addToCart.pending, (state) => {
         state.loading = true;

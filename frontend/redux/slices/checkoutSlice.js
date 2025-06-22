@@ -17,7 +17,9 @@ export const createCheckout = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data || { message: error.message || "Unknown error" }
+      );
     }
   }
 );
@@ -29,7 +31,7 @@ const checkoutSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducer: {},
   extraReducers: (builder) => {
     builder
       .addCase(createCheckout.pending, (state) => {
