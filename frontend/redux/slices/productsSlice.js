@@ -19,7 +19,7 @@ export const fetchProductsByFilters = createAsyncThunk(
     limit,
   }) => {
     const query = new URLSearchParams();
-    if (collection) query.append("collections", collection);
+    if (collection) query.append("collection", collection);
     if (size) query.append("size", size);
     if (color) query.append("color", color);
     if (gender) query.append("gender", gender);

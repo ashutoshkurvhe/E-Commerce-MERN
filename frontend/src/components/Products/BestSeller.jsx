@@ -1,0 +1,55 @@
+import ProductDetails from "./ProductDetails";
+import ProductGrid from "./ProductGrid";
+import { fetchProductsByFilters } from "../../../redux/slices/productsSlice";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+const BestSeller = () => {
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.products);
+  const [bestSellerProduct, setBestSellerProduct] = useState(null);
+
+  // Fetch products by filters on component mount and also fetch best seller products
+  useEffect(() => {
+    dispatch(
+      fetchProductsByFilters({
+        gender: "Women",
+        category: "Top Wear",
+        limit: 8,
+      })
+    );
+
+    //Fetch Best Seller Products
+    const fetchBestSeller = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/products/best-seller`
+        );
+        setBestSellerProduct(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBestSeller();
+  }, [dispatch]);
+  return (
+    <div className="w-[100%] mt-[100px]">
+      {/* Best Seller */}
+      <h2 className="text-3xl text-center font-bold mb-4">Best Seller</h2>
+      {bestSellerProduct ? (
+        <ProductDetails productId={bestSellerProduct._id} />
+      ) : (
+        <p className="text-center  ">Loading best seller product...</p>
+      )}
+
+      <div className="container mx-auto ">
+        <h2 className="text-3xl text-center font-bold mb-4">
+          Top Wears for Women
+        </h2>
+        <ProductGrid products={products} loading={loading} error={error} />
+      </div>
+    </div>
+  );
+};
+
+export default BestSeller;

@@ -13,85 +13,7 @@ const NewArrivals = () => {
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const [newArrivals, setNewArrivals] = useState([]);
-  // const newArrivals = [
-  //   {
-  //     _id: "1",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=1",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "2",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=2",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "3",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=3",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "4",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=4",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "5",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=5",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "6",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=6",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     _id: "7",
-  //     name: "Stylish Jacket",
-  //     price: 120,
-  //     images: [
-  //       {
-  //         url: "https://picsum.photos/500/500?random=7",
-  //         altText: "Stylish-Jacket",
-  //       },
-  //     ],
-  //   },
-  // ];
+
 
   useEffect(() => {
     const fetchNewArrivals = async () => {
@@ -166,11 +88,11 @@ const NewArrivals = () => {
 
       {/* Scroll Button */}
 
-      <div className="absolute right-0 bottom-[-100px] flex space-x-2">
+      <div className="absolute w-[100%] bottom-[-100px] flex justify-center items-center  space-x-2">
         <button
           onClick={() => scroll("left")}
           disabled={!canScrollLeft}
-          className={`p-2 rounded border ${
+          className={`p-2 rounded-full border ${
             canScrollLeft
             ? "bg-white text-black"
             : "bg-gray-200 text-gray-400 cursor-not-allowed "
@@ -182,7 +104,7 @@ const NewArrivals = () => {
         <button
           onClick={() => scroll("right")}
           disabled={!canScrollRight}
-          className={`p-2 rounded border ${
+          className={`p-2 rounded-full border ${
             canScrollRight
             ? "bg-white text-black"
             : "bg-gray-200 text-gray-400 cursor-not-allowed "
