@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminProducts } from "../../../redux/slices/adminProductSlice";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../../redux/slices/adminProductSlice";
 const ProductManagement = () => {
@@ -26,7 +28,7 @@ const ProductManagement = () => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.adminProducts);
   
-  udeffect(() => {
+  useEffect(() => {
     dispatch(fetchAdminProducts());
   }, [dispatch]);
 

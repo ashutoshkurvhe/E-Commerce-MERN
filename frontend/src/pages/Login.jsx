@@ -23,13 +23,14 @@ const Login = () => {
     if (user) {
       if (cart?.products.length > 0 && guestId) {
         dispatch(mergeCart({ guestId, user })).then(() => {
-
+          navigate(isCheckoutRedirect ? "/checkout" : "/");
         });
-      }else {
+      } else {
         navigate(isCheckoutRedirect ? "/checkout" : "/");
       }
     }
-  },[user, guestId, cart, navigate,isCheckoutRedirect, dispatch])
+  }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch, redirect]);
+  
     
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ const Login = () => {
   };
   return (
     <div className="flex">
-      <div className="w-full md:w-1/2 flex flex-col justify-center item-center p-8 md:p-12">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">
         <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm">
           <div className="flex justify-center mb-6">
             <h2 className="text-xl font-medium">Rabbit</h2>
@@ -72,7 +73,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-black text-white p-2 rounded-lg font-sembold hover:bg-gray-800 transition"
+            className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition"
           >
             {loading ? "Loading..." : "Sign In"}
           </button>

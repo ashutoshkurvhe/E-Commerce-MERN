@@ -1,4 +1,6 @@
 import { useNavigate, Link, NavLink } from "react-router-dom";
+import { clearCart } from "../../../redux/slices/CartSlice";
+import { logout } from "../../../redux/slices/authSlice";
 import {
   FaBoxOpen,
   FaClipboardList,
