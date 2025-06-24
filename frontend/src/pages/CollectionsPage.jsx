@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { FaFilter } from "react-icons/fa";;
+import { useEffect, useRef, useState, useMemo } from "react";
+import { FaFilter } from "react-icons/fa";
 import FilterSidebar from "../components/Products/FilterSidebar";
 import SortOptions from "../components/Products/SortOptions";
 import ProductGrid from "../components/Products/ProductGrid";
@@ -13,16 +13,24 @@ const CollectionsPage = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
-  const queryParams = Object.fromEntries([...searchParams]);
   const sidebarRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
 
  
 //collection page will fetch products based on collection and query params
-  useEffect(() => {
-    dispatch(fetchProductsByFilters({ collection, ...queryParams }));
-  }, [dispatch, collection, queryParams]); // Added dependency array
+const parsedParams = useMemo(() => {
+  return Object.fromEntries([...searchParams]);
+}, [searchParams]);
+
+useEffect(() => {
+  dispatch(
+    fetchProductsByFilters({
+      ...(collection && { collection }),
+      ...parsedParams,
+    })
+  );
+}, [dispatch, collection, parsedParams]); // Added dependency array
 
 
   // This function toggles the sidebar open and close state
@@ -52,12 +60,12 @@ const CollectionsPage = () => {
  
   return (
     <div className="flex flex-col lg:flex-row">
-      {/* Mobile Filter button */}
+      {/* Mobile Filter Button */}
       <button
         onClick={toggleSidebar}
         className="lg:hidden border p-2 flex justify-center items-center"
       >
-        <FaFilter className="mr-2"/> Filters
+        <FaFilter className="mr-2" /> Filters
       </button>
 
       {/* Filter Sidebar */}
@@ -70,14 +78,15 @@ const CollectionsPage = () => {
         <FilterSidebar />
       </div>
       <div className="flex-grow p-4">
-        <h2 className="text-2xl uppercase mb-4">All Collection</h2>
+        <h2 className="text-2xl uppercase mb-4">
+          {collection || "All Collections"}
+        </h2>
 
         {/* Sort Option */}
         <SortOptions />
 
         {/* Product Grid */}
         <ProductGrid products={products} loading={loading} error={error} />
-
       </div>
     </div>
   );
