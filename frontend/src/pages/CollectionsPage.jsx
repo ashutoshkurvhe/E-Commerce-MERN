@@ -18,7 +18,7 @@ const CollectionsPage = () => {
   
 
  
-//collection page will fetch products based on collection and query params
+//Collection page will fetch products based on collection and query params
 const parsedParams = useMemo(() => {
   return Object.fromEntries([...searchParams]);
 }, [searchParams]);
@@ -51,7 +51,7 @@ useEffect(() => {
   useEffect(() => {
     // Add Event linstener for click
     document.addEventListener("mousedown", handleClickOutside);
-    //clean event listener
+    //Clean event listener
     return () => { 
       document.removeEventListener("mousedown", handleClickOutside);
     }
