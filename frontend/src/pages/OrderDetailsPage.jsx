@@ -8,35 +8,6 @@ const OrderDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { orderDetails, loading, error} = useSelector((state)=>state.orders);
-
-  // useEffect(() => {
-  //   const mockOrderDetails = {
-  //     _id: id,
-  //     createdAt: new Date(),
-  //     isPaid: true,
-  //     isDelivered: false,
-  //     paymentMethod: "PayPal",
-  //     shippingMethod: "Standard",
-  //     shippingAddress: { city: "New York", country: "USA" },
-  //     orderItems: [
-  //       {
-  //         productId: "1",
-  //         name: "Jacket",
-  //         price: 120,
-  //         quantity: 1,
-  //         image: "https://picsum.photos/150?random=1",
-  //       },
-  //       {
-  //         productId: "2",
-  //         name: "Jacket",
-  //         price: 120,
-  //         quantity: 1,
-  //         image: "https://picsum.photos/150?random=2",
-  //       },
-  //     ],
-  //   };
-  //   setOrderDetails(mockOrderDetails);
-  // }, [id]);
   
   useEffect(() => {
     dispatch(fetchOrderDetails(id));
