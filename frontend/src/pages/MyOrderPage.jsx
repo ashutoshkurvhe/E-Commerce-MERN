@@ -8,42 +8,6 @@ const MyOrderPage = () => {
   const dispatch = useDispatch();
   const { orders, loading, error } = useSelector((state) => state.order);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const mockOrders = [
-  //       {
-  //         _id: "12345",
-  //         createdAt: new Date(),
-  //         shippingAddress: { city: "New York", country: "USA" },
-  //         orderItems: [
-  //           {
-  //             name: "Product 1",
-  //             image: "https://picsum.photos/500/500?random=2",
-  //           },
-  //         ],
-
-  //         totalPrice: 100,
-  //         isPaid: true,
-  //       },
-  //       {
-  //         _id: "45845",
-  //         createdAt: new Date(),
-  //         shippingAddress: { city: "New York", country: "USA" },
-  //         orderItems: [
-  //           {
-  //             name: "Product 1",
-  //             image: "https://picsum.photos/500/500?random=2",
-  //           },
-  //         ],
-
-  //         totalPrice: 100,
-  //         isPaid: true,
-  //       },
-  //     ];
-  //     setOrders(mockOrders);
-  //   }, 1000);
-  // }, []);
-
   useEffect(() => {
     dispatch(fetchUserOrders());
   }, [dispatch]);
