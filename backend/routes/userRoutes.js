@@ -106,12 +106,7 @@ router.post("/login", async (req, res) => {
 //@desc Get logged-in ser's profile (Protected Route)
 //@access Private
 router.get("/profile", protect, async (req, res) => {
-  try {
     res.json(req.user);
-    
-  } catch (error) {
-    res.status({ message: "User not found" });
-  }
 });
 
 module.exports = router;

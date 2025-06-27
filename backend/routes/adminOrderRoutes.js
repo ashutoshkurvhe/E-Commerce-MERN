@@ -4,6 +4,7 @@ const User = require("../Models/User");
 const { protect, admin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
+console.log(User);
 
 //@route GET /api/admin/orders
 //@desc Get all order (Admin only)
