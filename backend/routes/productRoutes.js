@@ -174,6 +174,7 @@ router.get("/", async (req, res) => {
     if (collection && collection.toLowerCase() !== "all") {
       query.collections = new RegExp(collection, "i");
     }
+    
     if (category && category.toLowerCase() !== "all") {
       // Make category search case-insensitive using regex
       query.category = new RegExp(category, "i");
