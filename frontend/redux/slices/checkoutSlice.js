@@ -31,7 +31,7 @@ const checkoutSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducer: {},
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(createCheckout.pending, (state) => {

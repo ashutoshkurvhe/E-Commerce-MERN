@@ -1,50 +1,53 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//Retrieve user info and token from loacalStorage if available
+// Retrieve user info and token from localStorage if available
 const userFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
+const tokenFromStorage = localStorage.getItem("userToken") || null;
 
-//Check for an existing guest ID in the the localStorage or generate a new one
+// Check or generate guest ID
 const initialGuestId =
   localStorage.getItem("guestId") || `guest_${new Date().getTime()}`;
 localStorage.setItem("guestId", initialGuestId);
 
-//Initial state
+// Initial state
 const initialState = {
   user: userFromStorage,
+  token: tokenFromStorage,
   guestId: initialGuestId,
   loading: false,
   error: null,
 };
 
-//Async Thunk for Uer Login
+// Async Thunk for User Login
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
         userData
       );
       localStorage.setItem("userInfo", JSON.stringify(response.data.user));
       localStorage.setItem("userToken", response.data.token);
-
-      return response.data.user; //Return the user object from the response
+      return response.data.user;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data || { message: error.message || "Unknown error" }
+      );
     }
   }
 );
 
-//Async Thunk for Uer Registration
+// Async Thunk for User Registration
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
         userData,
         {
           headers: {
@@ -54,25 +57,27 @@ export const registerUser = createAsyncThunk(
       );
       localStorage.setItem("userInfo", JSON.stringify(response.data.user));
       localStorage.setItem("userToken", response.data.token);
-
-      return response.data.user; //Return the user object from the response
+      return response.data.user;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data || { message: error.message || "Unknown error" }
+      );
     }
   }
 );
 
-//Slice
+// Slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.guestId = `guest_${new Date().getTime()}`; //Reset guest ID on logout
+      state.token = null;
+      state.guestId = `guest_${new Date().getTime()}`;
       localStorage.removeItem("userInfo");
       localStorage.removeItem("userToken");
-      localStorage.setItem("guestId", state.guestId); // Set new guest ID in localStorage
+      localStorage.setItem("guestId", state.guestId);
     },
     generateNewGuestId: (state) => {
       state.guestId = `guest_${new Date().getTime()}`;
@@ -88,10 +93,11 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.token = localStorage.getItem("userToken");
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload?.message;
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -100,10 +106,11 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.token = localStorage.getItem("userToken");
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload?.message;
       });
   },
 });

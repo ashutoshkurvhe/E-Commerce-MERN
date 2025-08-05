@@ -16,7 +16,7 @@ const AdminHomePage = () => {
 
   return (
       <div className='max-w-7xl mx-auto p-6'>
-          <h1 className='text-3xl font-bold mb-6' >Admin Dashboard </h1>
+          <h1 className='text-3xl font-bold mb-6'>Admin Dashboard </h1>
           {productsLoading || ordersLoading ? (<p>Loading...</p>) : productsError ? (<p className="text-red-500">Error fetching products: {productsError}</p>) : ordersError ? (<p classsName="text-red-500">Error fetching orders: {ordersError}</p>) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div className="p-4 shadow-md rounded-lg">

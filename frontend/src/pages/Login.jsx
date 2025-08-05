@@ -36,6 +36,7 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginUser({ email, password }));
   };
+  
   return (
     <div className="flex">
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">

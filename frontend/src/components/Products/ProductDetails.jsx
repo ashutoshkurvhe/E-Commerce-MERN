@@ -8,65 +8,6 @@ import {
   fetchSimilarProducts,
 } from "../../../redux/slices/productsSlice";
 import { addToCart } from "../../../redux/slices/CartSlice";
-// const selectedProduct = {
-//   name: "Stylish jacket",
-//   price: 120,
-//   originalPrice: 150,
-//   description: "This is a stylish Jacket perfect for any occasion",
-//   brand: "fashionBrand",
-//   material: "Leather",
-//   sizes: ["S", "M", "L", "XL"],
-//   colors: ["Red", "Black"],
-//   images: [
-//     {
-//       url: "https://picsum.photos/500/500?random=15",
-//       altText: "Stylish jacket 1",
-//     },
-//     {
-//       url: "https://picsum.photos/500/500?random=16",
-//       altText: "Stylish jacket 2",
-//     },
-//   ],
-// };
-
-// const similarProducts = [
-//     {
-//         _id: "1",
-//         name: "Stylish Jacket",
-//         price: 120,
-//         images: [{
-//             url: "https://picsum.photos/500/500?random=1",
-//             altText: "Stylish-Jacket",
-//         }]
-//     },
-//     {
-//         _id: "2",
-//         name: "Stylish Jacket",
-//         price: 120,
-//         images: [{
-//             url: "https://picsum.photos/500/500?random=2",
-//             altText: "Stylish-Jacket",
-//         }]
-//     },
-//     {
-//         _id: "3",
-//         name: "Stylish Jacket",
-//         price: 120,
-//         images: [{
-//             url: "https://picsum.photos/500/500?random=3",
-//             altText: "Stylish-Jacket",
-//         }]
-//     },
-//     {
-//         _id: "4",
-//         name: "Stylish Jacket",
-//         price: 120,
-//         images: [{
-//             url: "https://picsum.photos/500/500?random=4",
-//             altText: "Stylish-Jacket",
-//         }]
-//     }
-// ]
 
 const ProductDetails = ({ productId }) => {
   const { id } = useParams();

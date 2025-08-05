@@ -2,25 +2,8 @@ import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PayPalButton from "./PayPalButton";
 import { useDispatch, useSelector } from "react-redux";
-import { createCheckout } from "../../../redux/slices/CheckoutSlice";
+import { createCheckout } from "../../../redux/slices/checkoutSlice";
 useState;
-// const cart = {
-//   products: [
-//     {
-//       _id: "1",
-//       name: "Stylish Jacket",
-//       price: 120,
-//       images: "https://picsum.photos/500/500?random=1",
-//     },
-//     {
-//       _id: "1",
-//       name: "Stylish Jacket",
-//       price: 120,
-//       images: "https://picsum.photos/500/500?random=1",
-//     },
-//   ],
-//   totalPrice: 240,
-// };
 
 const CheckOut = () => {
   const navigate = useNavigate();

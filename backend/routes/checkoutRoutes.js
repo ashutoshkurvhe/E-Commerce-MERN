@@ -9,7 +9,7 @@ const router = express.Router()
 //route POST /api/checkout
 // @desc Create a new checkout session
 //@access Private
-router.post("/", protect, async (req, res) => {
+router.post("/checkout", protect, async (req, res) => {
     const { checkoutItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
     if (!checkoutItems || checkoutItems.length === 0) {
