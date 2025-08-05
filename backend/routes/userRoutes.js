@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
     //Create JWT payload
     const payload = { user: { id: user._id, role: user.role } };
 
-    //sgn and return the token along with user data
+    //sign and return the token along with user data
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
     //create JWT Payload
     const payload = { user: { id: user._id, role: user.role } };
 
-    //sgn and return the token along with user data
+    //sign and return the token along with user data
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
@@ -103,7 +103,7 @@ router.post("/login", async (req, res) => {
 });
 
 //@route GET /api/users/profile
-//@desc Get logged-in ser's profile (Protected Route)
+//@desc Get logged-in user's profile (Protected Route)
 //@access Private
 router.get("/profile", protect, async (req, res) => {
     res.json(req.user);

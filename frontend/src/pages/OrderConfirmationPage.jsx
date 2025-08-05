@@ -1,5 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { clearCart } from "../../redux/slices/CartSlice";
 
 const OrderConfirmationPage = () => {
   const dispatch = useDispatch();
@@ -8,7 +10,7 @@ const OrderConfirmationPage = () => {
 
   //Clear the cart when order is confirmed
 
-  udeEffect(() => {
+  useEffect(() => {
     if (checkout && checkout._id) {
       dispatch(clearCart());
       localStorage.removeItem("cart");

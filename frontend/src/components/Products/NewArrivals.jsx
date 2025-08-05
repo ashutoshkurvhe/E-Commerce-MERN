@@ -44,7 +44,7 @@ const NewArrivals = () => {
 
   
 
-  const handleMouseUpOrLeave = (e) => {
+  const handleMouseUpOrLeave = () => {
     setIsDragging(false)
   }
 
