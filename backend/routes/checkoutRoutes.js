@@ -9,7 +9,7 @@ const router = express.Router()
 //route POST /api/checkout
 // @desc Create a new checkout session
 //@access Private
-router.post("/checkout", protect, async (req, res) => {
+router.post("/", protect, async (req, res) => {
     const { checkoutItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
     if (!checkoutItems || checkoutItems.length === 0) {
@@ -27,10 +27,10 @@ router.post("/checkout", protect, async (req, res) => {
             paymentStatus: "Pending",
             isPaid: false,
         });
-        console.log('Checkout created for user: ${req.user._id');
+        console.log(`Checkout created for user: ${req.user._id}`);
         res.status(201).json(newCheckout);
     } catch (error) {
-        console.error("Error Creatingcheckout session:", error);
+        console.error("Error creating checkout session:", error);
         res.status(500).json({ message: "Server Error" });
     }
 });
