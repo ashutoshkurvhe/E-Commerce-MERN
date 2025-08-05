@@ -1,9 +1,9 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PayPalButton from "./PayPalButton";
 import { useDispatch, useSelector } from "react-redux";
 import { createCheckout } from "../../../redux/slices/checkoutSlice";
-useState;
+import axios from "axios";
 
 const CheckOut = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const CheckOut = () => {
 
   const handlePaymentSuccess = async (details) => {
     try {
-      const response = await axios.put(
+      await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/pay`,
         { paymentStatus: "paid", paymentDetails: details },
         {
@@ -67,9 +67,8 @@ const CheckOut = () => {
 
   const handleFinalizeCheckout = async (checkoutId) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL
-        }/api/checkout/$(chekoutId)/finalize`, {}, {
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/finalize`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
@@ -225,7 +224,7 @@ const CheckOut = () => {
                 <PayPalButton
                   amount={cart.totalPrice}
                   onSuccess={handlePaymentSuccess}
-                  onError={(err) => alert("payment failed. Try Again")}
+                  onError={() => alert("payment failed. Try Again")}
                 />
               </div>
             )}

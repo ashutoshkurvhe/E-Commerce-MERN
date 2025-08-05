@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from
   "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteUser } from "../../../redux/slices/adminSlice";
-import { addUser } from "../../../redux/slices/adminSlice";
+import { deleteUser, addUser, fetchUsers, updateUser } from "../../../redux/slices/adminSlice";
 const UserManagement = () => {
     // const users = [
     //   {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
@@ -47,7 +47,7 @@ const Hero = () => {
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
       <AnimatePresence mode="wait">
-        <motion.div
+        <Motion.div
           key={slides[index].id}
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -62,7 +62,7 @@ const Hero = () => {
             </h1>
             <p className="text-lg md:text-xl">{slides[index].description}</p>
           </div>
-        </motion.div>
+        </Motion.div>
       </AnimatePresence>
 
       {/* Navigation Arrows */}

@@ -1,14 +1,15 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { updateProduct } from "../../../redux/slices/adminProductSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateProduct, fetchProductsDetails } from "../../../redux/slices/adminProductSlice";
+import axios from "axios";
 
 const EditProductPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const {selectedProduct, loading, error} = useSelector((state)=> state.products)
-  const [productData, setProductData] = React.useState({
+  const [productData, setProductData] = useState({
     name: "",
     description: "",
     price: 0,

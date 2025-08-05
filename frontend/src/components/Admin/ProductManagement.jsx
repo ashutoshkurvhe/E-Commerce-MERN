@@ -33,7 +33,7 @@ const ProductManagement = () => {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    if (FaWindows.confirm("Are you sure you went to delete the product?")) {
+    if (window.confirm("Are you sure you want to delete the product?")) {
       dispatch(deleteProduct(id));
       // Call your delete API here
     }
