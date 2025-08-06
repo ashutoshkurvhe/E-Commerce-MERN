@@ -28,7 +28,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="container mx-auto flex item-center justify-between py-8 px-6">
+      <nav className="container mx-auto flex item-center justify-between py-4 px-6">
         {/* Left - Logo */}
         <div>
           <Link to="/" className="text-2xl font-medium">
@@ -36,28 +36,28 @@ const Navbar = () => {
           </Link>
         </div>
         {/* Center - navigation Links */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 bg-black py-4 px-4 rounded-full">
           <Link
             to="/collections/all?gender=Men"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+            className="text-gray-200 hover:text-white text-sm font-medium uppercase"
           >
             Men
           </Link>
           <Link
             to="/collections/all?gender=Women"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+            className="text-gray-200 hover:text-white text-sm font-medium uppercase"
           >
             Women
           </Link>
           <Link
             to="/collections/all?category=Top wear"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+            className="text-gray-200 hover:text-white text-sm font-medium uppercase"
           >
             Top Wear
           </Link>
           <Link
             to="/collections/all?category=Bottom Wear"
-            className="text-gray-700 hover:text-black text-sm font-medium uppercase"
+            className="text-gray-200 hover:text-white text-sm font-medium uppercase"
           >
             Bottom Wear
           </Link>

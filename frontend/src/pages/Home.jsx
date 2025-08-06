@@ -4,6 +4,7 @@ import NewArrivals from "../components/Products/NewArrivals";
 import FeaturedCollection from "../components/Products/FeaturedCollection";
 import FeaturesSection from "../components/Products/FeatureSection";
 import BestSeller from "../components/Products/BestSeller";
+import Services from "../components/Products/Services";
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       <BestSeller/>
       <FeaturedCollection />
       <FeaturesSection />
+      <Services />
     </div>
   );
 };

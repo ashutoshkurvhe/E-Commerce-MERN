@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.1",
     "animate-presence": "^0.2.1",
     "axios": "^1.8.4",
+    "lucide-react": "^0.536.0",
     "motion": "^12.18.1",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
@@ -24,6 +25,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.1",
     "sonner": "^2.0.3",
+    "swiper": "^11.2.10",
     "tailwindcss": "^4.1.1"
   },
   "devDependencies": {

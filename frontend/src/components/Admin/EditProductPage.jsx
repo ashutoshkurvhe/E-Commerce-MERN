@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateProduct, fetchProductsDetails } from "../../../redux/slices/adminProductSlice";
+import { updateProduct, fetchAdminProducts } from "../../../redux/slices/adminProductSlice";
 import axios from "axios";
 
 const EditProductPage = () => {
@@ -31,7 +31,7 @@ const EditProductPage = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchProductsDetails(id));
+      dispatch(fetchAdminProducts(id));
     }
   }, [dispatch, id]);
 

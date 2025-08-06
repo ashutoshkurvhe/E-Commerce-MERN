@@ -16,11 +16,11 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=39",
+        url: "https://pin.it/5vyI1nrKu",
         altText: "Classic Oxford Button-Down Shirt Front View",
       },
       {
-        url: "https://picsum.photos/500/500?random=40",
+        url: "https://pin.it/2sUVcaHmk",
         altText: "Classic Oxford Button-Down Shirt Back View",
       },
     ],
@@ -44,11 +44,11 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=41",
+        url: "https://pin.it/2x4WWUBe9",
         altText: "Slim-Fit Stretch Shirt Front View",
       },
       {
-        url: "https://picsum.photos/500/500?random=42",
+        url: "https://pin.it/4CCNfPkKl",
         altText: "Slim-Fit Stretch Shirt Back View",
       },
     ],
@@ -72,11 +72,11 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=43",
+        url: "https://pin.it/4eteLROkI",
         altText: "Casual Denim Shirt Front View",
       },
       {
-        url: "https://picsum.photos/500/500?random=44",
+        url: "https://pin.it/7Co8WLC93",
         altText: "Casual Denim Shirt Back View",
       },
     ],
@@ -100,11 +100,11 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=45",
+        url: "https://pin.it/1RbTahXm7",
         altText: "Printed Resort Shirt Front View",
       },
       {
-        url: "https://picsum.photos/500/500?random=1",
+        url: "https://pin.it/4ehsK1aO8",
         altText: "Printed Resort Shirt Back View",
       },
     ],
@@ -128,11 +128,11 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=47",
+        url: "https://pin.it/25zPBbtPL",
         altText: "Slim-Fit Easy-Iron Shirt Front View",
       },
       {
-        url: "https://picsum.photos/500/500?random=2",
+        url: "https://pin.it/25zPBbtPL",
         altText: "Slim-Fit Easy-Iron Shirt Front View",
       },
     ],
@@ -156,11 +156,11 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=3",
+        url: "https://pin.it/1WdleXfmv",
         altText: "Polo T-Shirt Front View",
       },
       {
-        url: "https://picsum.photos/500/500?random=4",
+        url: "https://pin.it/4JjdBueLe",
         altText: "Polo T-Shirt Back View",
       },
     ],
@@ -184,7 +184,7 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=5",
+        url: "https://pin.it/7u6GLXD9O",
         altText: "Oversized Graphic T-Shirt Front View",
       },
     ],
@@ -208,7 +208,7 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=6",
+        url: "https://pin.it/7u6GLXD9O",
         altText: "Regular-Fit Henley Shirt Front View",
       },
     ],
@@ -232,7 +232,7 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=7",
+        url: "https://pin.it/6Y0mcOHTP",
         altText: "Long-Sleeve Thermal Tee Front View",
       },
     ],
@@ -256,7 +256,7 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=8",
+        url: "https://pin.it/6Y0mcOHTP",
         altText: "V-Neck Classic T-Shirt Front View",
       },
     ],
@@ -280,7 +280,7 @@ const products = [
     gender: "Men",
     images: [
       {
-        url: "https://picsum.photos/500/500?random=9",
+        url: "https://pin.it/1lsNkBEJZ",
         altText: "Slim Fit Joggers Front View",
       },
     ],
