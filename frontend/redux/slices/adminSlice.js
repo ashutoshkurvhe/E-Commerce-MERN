@@ -19,8 +19,9 @@ export const addUser = createAsyncThunk(
   "admin/addUser",
   async (userData, { rejectWithValue }) => {
     try {
-        const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`, userData,
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
+        userData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -37,9 +38,11 @@ export const addUser = createAsyncThunk(
 //Update user info
 export const updateUser = createAsyncThunk(
   "admin/updateUser",
-  async ({ id, name, email, role }) => {
-        const response = await axios.put(
-            `${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`, {name,email,role},
+  async ({ id, name, email, role }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
+        { name, email, role },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -47,25 +50,26 @@ export const updateUser = createAsyncThunk(
         }
       );
       return response.data.user;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || { message: "Update failed" }
+      );
+    }
   }
 );
-
 
 //Delete user info
-export const deleteUser = createAsyncThunk(
-  "admin/deleteUser",
-  async (id) => {
-         await axios.delete(
-            `${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          },
-        }
-      );
-      return id;
-  }
-);
+export const deleteUser = createAsyncThunk("admin/deleteUser", async (id) => {
+  await axios.delete(
+    `${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      },
+    }
+  );
+  return id;
+});
 
 const adminSlice = createSlice({
   name: "admin",
@@ -91,17 +95,26 @@ const adminSlice = createSlice({
         state.error = action.error.message;
       })
 
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(updateUser.fulfilled, (state, action) => {
-          const updatedUser = action.payload;
-          const userIndex = state.users.findIndex(
-              (user) => user._id === updatedUser._id
-          );
-          if (userIndex !== -1) {
-              state.users[userIndex] = updatedUser
-          }
+        state.loading = false;
+        const updatedUser = action.payload;
+        const userIndex = state.users.findIndex(
+          (user) => user._id === updatedUser._id
+        );
+        if (userIndex !== -1) {
+          state.users[userIndex] = updatedUser;
+        }
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || "Failed to update user";
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.users= state.users.filter((user)=> user._id !== action.payload);
+        state.users = state.users.filter((user) => user._id !== action.payload);
       })
       .addCase(addUser.pending, (state) => {
         state.loading = true;
@@ -109,12 +122,12 @@ const adminSlice = createSlice({
       })
       .addCase(addUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.users.push(action.payload.user) //add a new user to the state
+        state.users.push(action.payload.user); //add a new user to the state
       })
       .addCase(addUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message; 
-      })
+        state.error = action.payload.message;
+      });
   },
 });
 

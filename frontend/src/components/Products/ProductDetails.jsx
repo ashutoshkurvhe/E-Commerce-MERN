@@ -88,13 +88,13 @@ const ProductDetails = ({ productId }) => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-8">
       {selectedProduct && (
-        <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg">
-          <div className="flex flex-col md:flex-row">
+        <div className="max-w-7xl mx-auto p-4 rounded-lg">
+          <div className="flex flex-col md:flex-row ">
             {/* Left Thumbnails */}
 
-            <div className="hidden md:flex flex-col space-y-4 mr-6">
+            <div className="hidden md:flex flex-col space-y-4 mr-6 ">
               {selectedProduct.images.map((image, index) => (
                 <img
                   key={index}
@@ -116,7 +116,7 @@ const ProductDetails = ({ productId }) => {
                   <img
                     src={mainImage}
                     alt="Main Product"
-                    className="w-full h-auto object-cover rounded-lg"
+                    className="w-full max-h-[600px] object-cover rounded-lg"
                   />
                 )}
               </div>
@@ -239,7 +239,7 @@ const ProductDetails = ({ productId }) => {
             </div>
           </div>
           <div className="mt-20">
-            <h2 className="text2xl text-center font-medium mb-4">
+            <h2 className="text-2xl text-center font-medium mb-4">
               You May Also Like
             </h2>
             <ProductGrid

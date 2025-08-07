@@ -7,8 +7,12 @@ import {
 } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
 import Searchbar from "./Searchbar";
+import logo from "../../assets/logo-white.webp";
 import CartDrawer from "../Layout/CartDrawer";
 import { useSelector } from "react-redux";
+
+
+
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
@@ -28,11 +32,11 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="container mx-auto flex item-center justify-between py-4 px-6">
+      <nav className="container-full mx-auto flex item-center justify-between py-4 px-2 md:px-6 bg-black">
         {/* Left - Logo */}
         <div>
           <Link to="/" className="text-2xl font-medium">
-            Logo
+            <img src={logo} alt="logo-image" className="w-20 h-5 md:w-40 md:h-10"/>
           </Link>
         </div>
         {/* Center - navigation Links */}
@@ -67,19 +71,19 @@ const Navbar = () => {
           {user && user.role === "admin" && (
             <Link
               to="/admin"
-              className="block bg-black px-3 py-1 rounded text-sm text-white"
+              className="block bg-white px-3 py-1 rounded text-sm text-black"
             >
               Admin
             </Link>
           )}
           <Link to="/profile" className="hover:text-black">
-            <HiOutlineUser className="h-6 w-6 text-gray-700" />
+            <HiOutlineUser className="h-6 w-6 text-gray-100" />
           </Link> 
           <button
             onClick={toggleCartDrawer}
             className="relative hover:text-black"
           >
-            <HiOutlineShoppingBag className="h-6 w-6 text-gray-700" />
+            <HiOutlineShoppingBag className="h-6 w-6 text-gray-100" />
             {cartItemCount > 0 && (
               <span className="absolute -top-1 bg-[#ea2e0e] text-white text-xs rounded-full px-2 py-0.5">
                 {cartItemCount}
@@ -92,7 +96,7 @@ const Navbar = () => {
           </div>
           <Searchbar />
           <button onClick={toggleNavDrawer} className="md:hidden">
-            <HiBars3BottomRight className="h-6 w-6 text-gray-700" />
+            <HiBars3BottomRight className="h-6 w-6 text-gray-100" />
           </button>
         </div>
       </nav>

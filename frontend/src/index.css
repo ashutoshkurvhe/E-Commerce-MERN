@@ -1,7 +1,17 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-#root{
-  font-family: "Inter",sans-serif;
+#root {
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+body {
+  background-image: linear-gradient(
+    to bottom right,
+    theme("colors.blue.100"),
+    theme("colors.rose.300")
+  );
 }

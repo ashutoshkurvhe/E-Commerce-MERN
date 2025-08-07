@@ -25,7 +25,7 @@ export const loginUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
         userData
       );
       localStorage.setItem("userInfo", JSON.stringify(response.data.user));
@@ -44,7 +44,7 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
         userData,
         {
           headers: {
@@ -57,9 +57,29 @@ export const registerUser = createAsyncThunk(
 
       return response.data.user; //Return the user object from the response
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response?.data || error);
     }
   }
+);
+
+export const getUserProfile = createAsyncThunk(
+  "auth/getUserProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data; //Return the user profile data
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error);
+    }
+  } 
 );
 
 //Slice
@@ -104,7 +124,20 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message;
-      });
+      })
+      .addCase(getUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+        .addCase(getUserProfile.fulfilled, (state, action) => {   
+          state.loading = false;
+          state.user = action.payload; // Update user profile in state
+        })
+        .addCase(getUserProfile.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.payload?.message;
+        });   
+  
   },
 });
 

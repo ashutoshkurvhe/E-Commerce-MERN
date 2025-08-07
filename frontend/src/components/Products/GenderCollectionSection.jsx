@@ -1,6 +1,6 @@
 import mensCollectionImage from "../../assets/mens-collection.webp";
 import womensCollectionImage from "../../assets/womens-collection.webp";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const GenderCollectionSection = () => {
   return (
     <section className="py-16 px-4 lg:px-0">
@@ -16,12 +16,12 @@ const GenderCollectionSection = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-3">
               Women's Collection
             </h2>
-            <Link
+            <NavLink
               to="/collections/all?gender=women"
               className="text-gray-900 underline"
             >
               Shop Now
-            </Link>
+            </NavLink>
           </div>
         </div>
         {/* men's Collection */}
@@ -36,12 +36,12 @@ const GenderCollectionSection = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-3">
               Men's Collection
             </h2>
-            <Link
+            <NavLink
               to="/collections/all?gender=men"
               className="text-gray-900 underline"
             >
               Shop Now
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>

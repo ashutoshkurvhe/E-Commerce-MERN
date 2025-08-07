@@ -32,9 +32,10 @@ const Login = () => {
   }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch, redirect]);
   
     
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
+    await dispatch(loginUser({ email, password })).unwrap()
+
   };
   
   return (

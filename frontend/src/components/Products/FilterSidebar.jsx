@@ -164,7 +164,7 @@ const FilterSidebar = () => {
               name="color"
               value={color}
               onClick={handleFilterChange}
-              className={`w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105 ${filters.color === color ? "ring-2 ring-blue-500" : ""}`}
+              className={`w-8 h-8 rounded-lg border border-gray-400 cursor-pointer transition hover:scale-105 ${filters.color === color ? "ring-2 ring-black" : ""}`}
               style={{ backgroundColor: color.toLowerCase() }}
             ></button>
           ))}

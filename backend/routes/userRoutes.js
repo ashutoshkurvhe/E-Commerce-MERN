@@ -28,7 +28,8 @@ router.post("/register", async (req, res) => {
     // })
 
     //Create JWT payload
-    const payload = { user: { id: user._id, role: user.role } };
+    const payload = { user: { id: user._id } };
+
 
     //sign and return the token along with user data
     jwt.sign(
@@ -80,7 +81,7 @@ router.post("/login", async (req, res) => {
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: "40h" },
+      { expiresIn: 144000 },
       (err, token) => {
         if (err) throw err;
 
@@ -106,7 +107,13 @@ router.post("/login", async (req, res) => {
 //@desc Get logged-in user's profile (Protected Route)
 //@access Private
 router.get("/profile", protect, async (req, res) => {
-    res.json(req.user);
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
+
 
 module.exports = router;

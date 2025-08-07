@@ -9,7 +9,7 @@ import Services from "../components/Products/Services";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-white">
       <Hero />
       <GenderCollectionSection />
       <NewArrivals />
