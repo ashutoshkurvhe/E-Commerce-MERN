@@ -90,8 +90,8 @@ const ProductDetails = ({ productId }) => {
   return (
     <div className="p-8">
       {selectedProduct && (
-        <div className="max-w-7xl mx-auto p-4 rounded-lg">
-          <div className="flex flex-col md:flex-row ">
+        <div className="max-w-[1550px] mx-auto p-4 rounded-lg">
+          <div className="flex flex-col md:flex-row bg-gray-100 p-6 rounded-lg shadow-lg">
             {/* Left Thumbnails */}
 
             <div className="hidden md:flex flex-col space-y-4 mr-6 ">
@@ -239,7 +239,7 @@ const ProductDetails = ({ productId }) => {
             </div>
           </div>
           <div className="mt-20">
-            <h2 className="text-2xl text-center font-medium mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               You May Also Like
             </h2>
             <ProductGrid

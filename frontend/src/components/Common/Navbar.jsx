@@ -7,9 +7,9 @@ import {
 } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
 import Searchbar from "./Searchbar";
-import logo from "../../assets/logo-white.webp";
 import CartDrawer from "../Layout/CartDrawer";
 import { useSelector } from "react-redux";
+import logo from "../../assets/logo.png";
 
 
 
@@ -32,11 +32,11 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="container-full mx-auto flex item-center justify-between py-4 px-2 md:px-6 bg-black">
+      <nav className="container-full mx-auto flex items-center justify-between py-4 px-2 md:px-6 bg-black">
         {/* Left - Logo */}
         <div>
-          <Link to="/" className="text-2xl font-medium">
-            <img src={logo} alt="logo-image" className="w-20 h-5 md:w-40 md:h-10"/>
+          <Link to="/" className="text-2xl text-white font-medium">
+            <img src={logo} alt="" className="w-40 h-10" />
           </Link>
         </div>
         {/* Center - navigation Links */}
@@ -67,7 +67,7 @@ const Navbar = () => {
           </Link>
         </div>
         {/* Right - Icons */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
           {user && user.role === "admin" && (
             <Link
               to="/admin"

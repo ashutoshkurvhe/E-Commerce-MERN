@@ -1,109 +1,124 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const ImageCarousel = ({ images, theme }) => {
+const ParallaxCarousel = ({ womenImages, menImages }) => {
+  const [currentSection, setCurrentSection] = useState("women");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Auto-switch images every 3 seconds
+  const currentImages = currentSection === "women" ? womenImages : menImages;
+
   useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentIndex(prev => (prev + 1) % images.length);
-        setIsTransitioning(false);
-      }, 200);
-    }, 3000);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % currentImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [currentImages.length]);
 
-    return () => clearInterval(imageInterval);
-  }, [images.length]);
-
-  // Reset to first image when theme changes
   useEffect(() => {
     setCurrentIndex(0);
-  }, [theme]);
+  }, [currentSection]);
 
-  const getImageIndex = (offset) => {
-    return (currentIndex + offset + images.length) % images.length;
+  const getParallaxStyle = (index) => {
+    const position =
+      (index - currentIndex + currentImages.length) % currentImages.length;
+
+    if (position === 0) {
+      return {
+        transform: "translateX(0px) scale(1)",
+        opacity: 1,
+        zIndex: 30,
+      };
+    } else if (position === 1) {
+      return {
+        transform: "translateX(150px) scale(0.8)",
+        opacity: 0.6,
+        zIndex: 20,
+      };
+    } else if (position === 2) {
+      return {
+        transform: "translateX(250px) scale(0.6)",
+        opacity: 0.3,
+        zIndex: 10,
+      };
+    } else if (position === currentImages.length - 1) {
+      return {
+        transform: "translateX(-150px) scale(0.8)",
+        opacity: 0.6,
+        zIndex: 20,
+      };
+    } else {
+      return {
+        transform: "translateX(-250px) scale(0.6)",
+        opacity: 0.3,
+        zIndex: 10,
+      };
+    }
   };
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      {/* Background images */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <img
-          src={images[getImageIndex(-2)]}
-          alt="Fashion background"
-          className={`absolute w-64 h-80 object-cover rounded-lg opacity-20 blur-sm transform scale-75 transition-all duration-700 ${
-            theme === 'men' ? '-translate-x-32' : 'translate-x-32'
-          }`}
-        />
-        <img
-          src={images[getImageIndex(2)]}
-          alt="Fashion background"
-          className={`absolute w-64 h-80 object-cover rounded-lg opacity-20 blur-sm transform scale-75 transition-all duration-700 ${
-            theme === 'men' ? 'translate-x-32' : '-translate-x-32'
-          }`}
-        />
+    <div className="fade-in relative w-full h-full flex flex-col items-center justify-center overflow-hidden to-slate-900">
+      {/* Section Title */}
+      <div className="mb-8">
+        <h2 className="text-4xl font-bold text-white tracking-wider text-center md:text-left">
+          {currentSection === "women"
+            ? "WOMEN'S COLLECTION"
+            : "MEN'S COLLECTION"}
+        </h2>
       </div>
 
-      {/* Side images */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <img
-          src={images[getImageIndex(-1)]}
-          alt="Fashion side"
-          className={`absolute w-72 h-96 object-cover rounded-lg shadow-soft transform transition-all duration-500 hover:scale-105 ${
-            theme === 'men'
-              ? '-translate-x-40 scale-90 opacity-70 blur-[1px]'
-              : '-translate-x-40 scale-90 opacity-70 blur-[1px]'
-          } ${isTransitioning ? 'opacity-50' : ''}`}
-        />
-        <img
-          src={images[getImageIndex(1)]}
-          alt="Fashion side"
-          className={`absolute w-72 h-96 object-cover rounded-lg shadow-soft transform transition-all duration-500 hover:scale-105 ${
-            theme === 'men'
-              ? 'translate-x-40 scale-90 opacity-70 blur-[1px]'
-              : 'translate-x-40 scale-90 opacity-70 blur-[1px]'
-          } ${isTransitioning ? 'opacity-50' : ''}`}
-        />
+      {/* Carousel Container */}
+      <div className="relative w-80 h-96 mb-12">
+        {currentImages.map((image, index) => (
+          <img
+            key={`${currentSection}-${index}`}
+            src={image}
+            alt={`${currentSection === "women" ? "Women" : "Men"} Fashion ${
+              index + 1
+            }`}
+            className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-2xl transition-all duration-1200 cursor-pointer hover:shadow-purple-500/25"
+            style={getParallaxStyle(index)}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
       </div>
 
-      {/* Main center image */}
-      <div className="relative z-10">
-        <img
-          src={images[currentIndex]}
-          alt="Fashion main"
-          className={`w-80 h-[28rem] object-cover rounded-xl shadow-luxury transform transition-all duration-500 hover:scale-105 ${
-            isTransitioning ? 'opacity-80 scale-95' : 'opacity-100 scale-100'
-          }`}
-        />
-        <div
-          className={`absolute inset-0 rounded-xl transition-all duration-500 ${
-            theme === 'men'
-              ? 'bg-gradient-to-t from-men-background/30 to-transparent'
-              : 'bg-gradient-to-t from-women-background/30 to-transparent'
-          }`}
-        />
-      </div>
-
-      {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-        {images.map((_, index) => (
+      {/* Image Navigation Dots */}
+      <div className="flex space-x-2 mb-6">
+        {currentImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? theme === 'men'
-                  ? 'bg-men-foreground scale-125'
-                  : 'bg-women-foreground scale-125'
-                : 'bg-white/40 hover:bg-white/60'
+                ? "bg-white scale-125 shadow-lg"
+                : "bg-white/50 hover:bg-white/70"
             }`}
           />
         ))}
+      </div>
+
+      {/* Section Toggle Dots */}
+      <div className="flex space-x-4">
+        <button
+          onClick={() => setCurrentSection("women")}
+          className={`px-6 py-1 rounded-full transition-all duration-300 font-semibold ${
+            currentSection === "women"
+              ? "bg-red-300 text-white shadow-lg shadow-pink-500/25 scale-105"
+              : "bg-white/20 text-white/70 hover:bg-white/30 hover:text-white"
+          }`}
+        >
+        </button>
+        <button
+          onClick={() => setCurrentSection("men")}
+          className={`px-6 py-1 rounded-full transition-all duration-300 font-semibold ${
+            currentSection === "men"
+              ? "bg-blue-300 text-white shadow-lg shadow-blue-500/25 scale-105"
+              : "bg-white/20 text-white/70 hover:bg-white/30 hover:text-white"
+          }`}
+        >
+        </button>
       </div>
     </div>
   );
 };
 
-export default ImageCarousel;
+export default ParallaxCarousel;

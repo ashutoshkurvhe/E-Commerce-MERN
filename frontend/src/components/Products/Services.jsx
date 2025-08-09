@@ -17,15 +17,32 @@ const features = [
   { icon: Badge, text: "Best Prices" },
 ];
 
+const clothingCategories = [
+  "T-Shirts",
+  "Shirts",
+  "Dresses",
+  "Hoodies",
+  "Jackets",
+  "Jeans",
+  "Pants",
+  "Skirts",
+  "Sweaters",
+  "Blazers",
+  "Shorts",
+  "Activewear",
+  "Loungewear",
+  "Underwear",
+];
+
 const Services = () => {
   return (
-    <div className="w-full space-y-8">
+    <div className="w-full space-y-4 ">
       {/* Features Carousel */}
-      <div className="overflow-hidden">
-        <h2 className="text-xl font-bold text-black mb-4 text-center">
+      <div className="overflow-hidden p-4">
+        <h2 className="text-xl md:text-2xl font-bold text-black mb-4 text-center">
           Why Shop With Us
         </h2>
-        <div className="relative bg-gradient-to-bl from-pink-600 to-blue-600 text-white ">
+        <div className="relative text-black">
           <motion.div
             className="flex gap-6 items-center"
             animate={{ x: [0, -1000] }}
@@ -40,11 +57,7 @@ const Services = () => {
               return (
                 <motion.div
                   key={`${feature.text}-${index}`}
-                  className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-4 whitespace-nowrap"
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "rgba(255,255,255,0.2)",
-                  }}
+                  className="flex items-center gap-3 bg-white text-black rounded-full shadow-lg px-4 py-2 whitespace-nowrap"
                 >
                   <Icon className="w-6 h-6 text-primary-foreground" />
                   <span className="font-medium text-primary-foreground">
@@ -59,7 +72,7 @@ const Services = () => {
 
       {/* Product Categories */}
       <div className="bg-card rounded-2xl p-6 shadow-medium overflow-hidden">
-        <h2 className="text-xl font-bold text-card-foreground mb-4 text-center">
+        <h2 className="text-xl md:text-2xl font-bold text-card-foreground mb-4 text-center">
           Shop by Category
         </h2>
         <div className="relative">
@@ -72,40 +85,16 @@ const Services = () => {
               ease: "linear",
             }}
           >
-            {[
-              "Electronics",
-              "Fashion",
-              "Home & Garden",
-              "Sports",
-              "Books",
-              "Beauty",
-              "Automotive",
-              "Toys",
-              "Health",
-              "Music",
-              "Gaming",
-            ]
-              .concat([
-                "Electronics",
-                "Fashion",
-                "Home & Garden",
-                "Sports",
-                "Books",
-                "Beauty",
-                "Automotive",
-                "Toys",
-                "Health",
-                "Music",
-                "Gaming",
-              ])
-              .map((category, index) => (
+            {[...clothingCategories, ...clothingCategories].map(
+              (category, index) => (
                 <motion.div
                   key={`${category}-${index}`}
-                  className="bg-black text-white rounded-full px-6 py-2 whitespace-nowrap font-medium"
+                  className=" bg-white text-black rounded-full shadow-lg px-6 py-2 whitespace-nowrap font-medium"
                 >
                   {category}
                 </motion.div>
-              ))}
+              )
+            )}
           </motion.div>
         </div>
       </div>

@@ -35,7 +35,9 @@ const BestSeller = () => {
   return (
     <div className="w-[100%] mt-[100px]">
       {/* Best Seller */}
-      <h2 className="text-3xl text-center font-bold mb-4">Best Seller</h2>
+      <h2 className="text-5xl md:text-6xl font-bold text-center mb-4">
+        Best Seller
+      </h2>
       {bestSellerProduct ? (
         <ProductDetails productId={bestSellerProduct._id} />
       ) : (
@@ -43,7 +45,7 @@ const BestSeller = () => {
       )}
 
       <div className="container mx-auto ">
-        <h2 className="text-3xl text-center font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
           Top Wears for Women
         </h2>
         <ProductGrid products={products} loading={loading} error={error} />

@@ -1,5 +1,5 @@
 const express = require("express");
-const Checkout = require("../models/Checkout");
+const Checkout = require("../Models/Checkout");
 const Cart = require("../Models/Cart");
 const Order = require("../Models/Order");
 const { protect } = require("../middleware/authMiddleware");
@@ -30,7 +30,11 @@ router.post("/", protect, async (req, res) => {
     res.status(201).json(newCheckout);
   } catch (error) {
     console.error("Error creating checkout:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("Request body:", req.body);
+    res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
   }
 });
 

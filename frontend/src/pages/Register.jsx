@@ -42,18 +42,18 @@ const Register = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-full md:w-1/2 flex flex-col justify-center item-center p-8 md:p-12">
+    <div className="flex bg-white m-20 rounded-2xl shadow-lg overflow-hidden">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md bg-white p-8 rounded-lg border shadow-sm"
+          className="w-full bg-white p-8"
         >
           <div className="flex justify-center mb-6">
-            <h2 className="text-xl font-medium">Rabbit</h2>
+            <h2 className="text-xl font-medium">Fabrica</h2>
           </div>
           <h2 className="text-2xl font-bold text-center mb-6">Hey there!</h2>
           <p className="text-center mb-6">
-            Enter your username, email and password to lRegister
+            Enter your username, email and password to Register
           </p>
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-2">Name</label>
@@ -108,7 +108,7 @@ const Register = () => {
           </p>
         </form>
       </div>
-      <div className="hidden md:block w-1/2 bg-gray-800">
+      <div className="hidden md:block w-1/2">
         <div className="h-full flex flex-col justify-center items-center">
           <img
             src={register}

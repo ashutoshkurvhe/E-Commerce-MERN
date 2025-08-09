@@ -25,7 +25,7 @@ const CheckOut = () => {
 
   useEffect(() => {
     if (!cart || !cart.products || cart.products.length === 0) {
-      navigate("/")
+      navigate("/");
     }
   }, [cart, navigate]);
 
@@ -37,7 +37,7 @@ const CheckOut = () => {
           checkoutItems: cart.products,
           shippingAddress,
           paymentMethod: "paypal",
-          totalPrice: cart.toatalPrice,
+          totalPrice: cart.totalPrice,
         })
       );
       if (res.payload && res.payload._id) {
@@ -59,7 +59,6 @@ const CheckOut = () => {
       );
 
       await handleFinalizeCheckout(checkoutId);
-      
     } catch (error) {
       console.error(error);
     }
@@ -68,23 +67,26 @@ const CheckOut = () => {
   const handleFinalizeCheckout = async (checkoutId) => {
     try {
       await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/finalize`, {}, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      }
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/checkout/${checkoutId}/finalize`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
+        }
       );
-        navigate("/order-confirmation")
-      
+      navigate("/order-confirmation");
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   if (loading) return <p>Loading cart...</p>;
-  if (error) return <p>Error: {error}</p>
+  if (error) return <p>Error: {error}</p>;
   if (!cart || !cart.products || cart.products.length === 0) {
-    return <p>Your cart is empty</p>
+    return <p>Your cart is empty</p>;
   }
 
   return (
@@ -98,7 +100,7 @@ const CheckOut = () => {
             <label className="block text-gray-700">Email</label>
             <input
               type="email"
-              value={user? user.email: ""}
+              value={user ? user.email : ""}
               className="w-full p-2 border rounded"
               disabled
             />
