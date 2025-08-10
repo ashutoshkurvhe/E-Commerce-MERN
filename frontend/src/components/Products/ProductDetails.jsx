@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import ProductGrid from "./ProductGrid";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import {
   fetchSimilarProducts,
 } from "../../../redux/slices/productsSlice";
 import { addToCart } from "../../../redux/slices/CartSlice";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
 const ProductDetails = ({ productId }) => {
   const { id } = useParams();
@@ -21,6 +22,8 @@ const ProductDetails = ({ productId }) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const sectionRef = useRef(null);
+  useFadeIn(sectionRef, { delay: 0.3 });
 
   const productFetchId = productId || id;
   useEffect(() => {
@@ -238,7 +241,7 @@ const ProductDetails = ({ productId }) => {
               </div>
             </div>
           </div>
-          <div className="mt-20">
+          <div ref={sectionRef} className="mt-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
               You May Also Like
             </h2>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ParallaxCarousel = ({ womenImages, menImages }) => {
+  
   const [currentSection, setCurrentSection] = useState("women");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -9,13 +10,15 @@ const ParallaxCarousel = ({ womenImages, menImages }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % currentImages.length);
-    }, 4000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [currentImages.length]);
+
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [currentSection]);
+
 
   const getParallaxStyle = (index) => {
     const position =
@@ -55,10 +58,10 @@ const ParallaxCarousel = ({ womenImages, menImages }) => {
   };
 
   return (
-    <div className="fade-in relative w-full h-full flex flex-col items-center justify-center overflow-hidden to-slate-900">
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden to-slate-900">
       {/* Section Title */}
       <div className="mb-8">
-        <h2 className="text-4xl font-bold text-white tracking-wider text-center md:text-left">
+        <h2 className="fade-in text-4xl font-bold text-white tracking-wider text-center md:text-left">
           {currentSection === "women"
             ? "WOMEN'S COLLECTION"
             : "MEN'S COLLECTION"}
@@ -66,7 +69,7 @@ const ParallaxCarousel = ({ womenImages, menImages }) => {
       </div>
 
       {/* Carousel Container */}
-      <div className="relative w-80 h-96 mb-12">
+      <div className="fade-in relative w-80 h-96 mb-12">
         {currentImages.map((image, index) => (
           <img
             key={`${currentSection}-${index}`}
@@ -82,7 +85,7 @@ const ParallaxCarousel = ({ womenImages, menImages }) => {
       </div>
 
       {/* Image Navigation Dots */}
-      <div className="flex space-x-2 mb-6">
+      <div className="fade-in flex space-x-2 mb-6">
         {currentImages.map((_, index) => (
           <button
             key={index}
@@ -100,16 +103,17 @@ const ParallaxCarousel = ({ womenImages, menImages }) => {
       <div className="flex space-x-4">
         <button
           onClick={() => setCurrentSection("women")}
-          className={`px-6 py-1 rounded-full transition-all duration-300 font-semibold ${
+          className={`fade-in px-6 py-1 rounded-full transition-all duration-300 font-semibold ${
             currentSection === "women"
               ? "bg-red-300 text-white shadow-lg shadow-pink-500/25 scale-105"
               : "bg-white/20 text-white/70 hover:bg-white/30 hover:text-white"
           }`}
         >
         </button>
+
         <button
           onClick={() => setCurrentSection("men")}
-          className={`px-6 py-1 rounded-full transition-all duration-300 font-semibold ${
+          className={`fade-in px-6 py-1 rounded-full transition-all duration-300 font-semibold ${
             currentSection === "men"
               ? "bg-blue-300 text-white shadow-lg shadow-blue-500/25 scale-105"
               : "bg-white/20 text-white/70 hover:bg-white/30 hover:text-white"

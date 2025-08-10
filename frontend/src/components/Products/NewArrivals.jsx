@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
 const NewArrivals = () => {
   const scrollRef = useRef(null);
@@ -11,6 +12,8 @@ const NewArrivals = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [newArrivals, setNewArrivals] = useState([]);
+  const sectionRef = useRef(null);
+  useFadeIn(sectionRef, { delay: 0.3 });
 
   useEffect(() => {
     const fetchNewArrivals = async () => {
@@ -72,7 +75,7 @@ const NewArrivals = () => {
 
   return (
     <section className="py-16 px-4 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto text-center mb-12 relative">
+      <div ref={sectionRef} className="container mx-auto text-center mb-12 relative">
         <div className="mb-8">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
             Explore New Arrivals
@@ -111,7 +114,6 @@ const NewArrivals = () => {
 
         {/* Scrollable Product List */}
         <div
-          ref={scrollRef}
           className={`flex space-x-6 overflow-x-auto pb-8 pt-4
             scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 
             hover:scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full

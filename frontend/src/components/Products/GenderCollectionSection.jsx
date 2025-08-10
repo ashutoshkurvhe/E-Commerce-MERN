@@ -1,13 +1,17 @@
 import mensCollectionImage from "../../assets/register.webp";
 import womensCollectionImage from "../../assets/login.webp";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useRef } from "react";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
 const GenderCollectionSection = () => {
+   const sectionRef = useRef(null);
+   useFadeIn (sectionRef, { delay: 0.3 });
   return (
     <section className="py-20 px-4 lg:px-0 bg-gradient-to-br from-slate-50 to-gray-100">
-      <div className="container mx-auto">
+      <div ref={sectionRef} className="container mx-auto">
         {/* Main Heading */}
-        <div className="text-center mb-16">
+        <div ref={sectionRef} className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-black mb-4">
             Discover Your Style
           </h1>

@@ -5,15 +5,21 @@ import FeaturedCollection from "../components/Products/FeaturedCollection";
 import FeaturesSection from "../components/Products/FeatureSection";
 import BestSeller from "../components/Products/BestSeller";
 import Services from "../components/Products/Services";
+import React, { useRef } from "react";
+import { useFadeIn } from "../hooks/useFadeIn";
 
 
 const Home = () => {
+  const heroRef = useRef(null);
+
+  // Apply animation
+  useFadeIn(heroRef, { duration: 1.2, delay: 0.2 });
   return (
-    <div className="bg-white">
+    <div className="bg-white" ref={heroRef}>
       <Hero />
       <GenderCollectionSection />
       <NewArrivals />
-      <BestSeller/>
+      <BestSeller />
       <FeaturedCollection />
       <Services />
       <FeaturesSection />

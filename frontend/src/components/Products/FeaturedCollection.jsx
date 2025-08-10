@@ -1,13 +1,16 @@
-import React from 'react'
+import { useRef } from 'react'
 import featured from "../../assets/featured.webp"
 import { NavLink } from 'react-router-dom'
+import { useFadeIn } from '../../hooks/useFadeIn';
 
 const FeaturedCollection = () => {
+  const sectionRef = useRef(null);
+  useFadeIn(sectionRef, { delay: 0.3 });
   return (
     <section className="py-16 px-4 lg:px-0">
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center bg-green-50 rounded-3xl">
         {/* Left Section */}
-        <div className="lg:w-1/2 p-8 text-center lg:text-left">
+        <div ref={sectionRef} className="lg:w-1/2 p-8 text-center lg:text-left">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">
             Confort and Style
           </h2>
@@ -21,7 +24,7 @@ const FeaturedCollection = () => {
           </p>
           <NavLink
             to="/collections/all?gender=women"
-            className="inline-flex items-center px-6 py-4 bg-black text-white font-semibold rounded-xl hover:from-pink-600 hover:to-gray-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-pink-500/25"
+            className="inline-flex items-center px-6 py-4 bg-black text-white font-semibold rounded-xl  hover:to-gray-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-pink-500/25"
           >
             Shop Women's
             <svg
@@ -41,11 +44,11 @@ const FeaturedCollection = () => {
         </div>
 
         {/* Right Content */}
-        <div className="lg:w-1/2">
+        <div className="lg:w-1/2 overflow-hidden">
           <img
             src={featured}
             alt="Featured Colletion"
-            className="w-full h-[750px] object-cover lg:rounded-tr-3xl lg-rounded-br-3xl"
+            className="w-full h-[750px] object-cover lg:rounded-tr-3xl lg-rounded-br-3xl hover:scale-105 transition-all duration-700 shadow-2xl"
           />
         </div>
       </div>

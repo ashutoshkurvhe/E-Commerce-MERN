@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdminProducts } from "../../../redux/slices/adminProductSlice";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { deleteProduct } from "../../../redux/slices/adminProductSlice";
 const ProductManagement = () => {
   // const products = [
@@ -43,7 +43,15 @@ const ProductManagement = () => {
   if(error) return <p>Error: {error}</p>
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 ">Product Management</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold mb-6 ">Product Management</h2>
+        <NavLink
+          to="/admin/products/add"
+          className="group font-inter font-medium bg-black text-white text-lg px-6 py-2 rounded-md transition-all duration-300 transform hover:scale-105 hover:shadow-luxury focus:outline-none focus:ring-4"
+        >
+          Add New
+        </NavLink>
+      </div>
       <div className="overflow-x-auto shadow-md">
         <table className="min-w-full text-left text-gray-500">
           <thead className="bg-gray-900 text-xs uppercase text-gray-100">

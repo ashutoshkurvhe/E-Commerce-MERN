@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TextArea from "../../components/Home/TextArea";
-import ImageCarousel from "../../components/Home/ImageCarousel";
+import TextArea from "../../components/Hero/TextArea";
+import ImageCarousel from "../../components/Hero/ImageCarousel";
 
 // Import fashion images
 import menFashion1 from "../../assets/men-fashion-1.jpeg";
@@ -31,7 +31,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="w-full min:h-[calc(100vh-80px)] flex overflow-hidden relative ">
+    <section className="w-full h-full md:h-[calc(100vh-80px)] flex overflow-hidden relative ">
       {/* Dynamic background gradient based on theme */}
       <div
         className={`absolute inset-0 transition-all duration-1000 ease-in-out bg-gradient-to-tr from-red-300 to-blue-200 ${
@@ -56,7 +56,7 @@ const Hero = () => {
       </div>
 
       {/* Theme indicator dots */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+      <div className="absolute bottom-8 hidden left-1/2 transform -translate-x-1/2 md:flex space-x-3 z-20">
         <div
           className={`w-3 h-3 rounded-full transition-all duration-300 ${
             currentTheme === "men" ? "bg-gray-200" : "bg-black"

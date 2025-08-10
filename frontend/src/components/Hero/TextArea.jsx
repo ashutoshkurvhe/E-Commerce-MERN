@@ -34,7 +34,7 @@ const TextArea = ({ currentTheme }) => {
       {/* Animated heading */}
       <div className="overflow-hidden mb-6">
         <h1
-          className={`fade-in text-4xl lg:text-6xl font-bold whitespace-wrap h-[120px] text-white
+          className={`fade-in text-4xl lg:text-6xl font-bold whitespace-wrap h-[80px] md:h-[120px] text-white
             `}
         >
           {displayText}
@@ -65,7 +65,7 @@ const TextArea = ({ currentTheme }) => {
       {/* CTA Button */}
       <button
         onClick={handleShopNow}
-        className={`fade-in group font-inter font-medium bg-black text-white text-lg px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-luxury focus:outline-none focus:ring-4 ${
+        className={`fade-in group font-inter font-medium bg-black text-white text-lg px-8 py-4 rounded-xl hover:to-gray-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-pink-500/25 focus:outline-none focus:ring-4 ${
           currentTheme === "men"
             ? "bg-men-foreground text-men-background hover:bg-men-accent focus:ring-men-accent/30"
             : "bg-women-foreground text-women-background hover:bg-women-accent focus:ring-women-accent/30"
