@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { mergeCart } from "../../redux/slices/CartSlice";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 const Register = () => {
   const [name, setName] = React.useState("");
@@ -37,9 +38,11 @@ const Register = () => {
     e.preventDefault();
     try {
       await dispatch(registerUser({ name, email, password, role })).unwrap();
+      toast.success("Registration successful!");
       // Redirect happens in useEffect
     } catch (error) {
       console.error("Registration failed:", error);
+      toast.error("Failed to register")
     }
   };
 

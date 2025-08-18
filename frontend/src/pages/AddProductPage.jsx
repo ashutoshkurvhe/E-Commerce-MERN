@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { createProduct } from "../../redux/slices/adminProductSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { toast } from "sonner";
 
 const AddProductPage = () => {
-  const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
-
   // Form state
   const [formData, setFormData] = useState({
     name: "",
@@ -30,6 +29,10 @@ const AddProductPage = () => {
     weight: "",
     sku: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
 
   // Handle input change
   const handleChange = (e) => {
@@ -39,32 +42,18 @@ const AddProductPage = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
+  
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
-      // Convert comma-separated strings to arrays
-      const payload = {
-        ...formData,
-        sizes: formData.sizes.split(",").map((s) => s.trim()),
-        colors: formData.colors.split(",").map((c) => c.trim()),
-        tags: formData.tags.split(",").map((t) => t.trim()),
-        images: formData.images.split(",").map((img) => img.trim()),
-      };
-
-      await axios.post("/api/admin/products", payload, {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-        },
-      });
-
-      toast.success("Product added successfully!");
+      await dispatch(createProduct(formData)).unwrap();
+      toast.success("Product added successfully");
       navigate("/admin/products");
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || "Error adding product");
+      toast.error("Failed to add product");
     }
   };
 
@@ -113,7 +102,6 @@ const AddProductPage = () => {
           >
             Add Product
           </button>
-          
         </div>
       </form>
     </div>
