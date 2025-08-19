@@ -42,6 +42,14 @@ app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes); // Changed path to /products
 app.use("/api/admin/orders", adminOrderRoutes);
 
+app.get("/", (req, res) => {
+  res.send({
+    activeStatus: true,
+    error: false,
+    message: "Welcome to Expense Tracker App API",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
