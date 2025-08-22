@@ -43,16 +43,13 @@ React Icons & Lucide Icons for modern UI
 Frontend: React, Redux Toolkit, Tailwind CSS, Sonner, React Icons, Lucide Icons
 Backend: Node.js, Express.js, MongoDB, JWT, Bcrypt
 
-📸 Screenshots
-
-(Add some screenshots of your homepage, admin panel, and product filters here for better presentation)
 
 🚀 Installation
 
 Clone the repository
 
-git clone https://github.com/your-username/mern-ecommerce.git
-cd mern-ecommerce
+git clone https://github.com/ashutoshkurvhe/E-Commerce-MERN.git
+cd E-Commerce-MERN
 
 
 Install dependencies
@@ -64,12 +61,6 @@ npm install
 # Frontend
 cd ../frontend
 npm install
-
-
-Create a .env file in the backend directory and add:
-
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_jwt_secret
 
 
 Start the application
@@ -84,7 +75,7 @@ npm start
 
 📌 Roadmap / Future Improvements
 
-Add payment gateway integration (Stripe/PayPal)
+Add payment gateway integration (PayPal)
 
 Wishlist & Cart persistence
 
