@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "http://localhost:9000"
+      "http://localhost:5173",
+      "https://e-commerce-mern-57e2.onrender.com",
     ],
   })
 );
