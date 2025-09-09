@@ -1,25 +1,46 @@
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAdminProducts } from "../../../redux/slices/adminProductSlice";
-import { useEffect } from "react";
+import {
+  fetchAdminProducts,
+  deleteProduct,
+} from "../../../redux/slices/adminProductSlice";
 import { Link, NavLink } from "react-router-dom";
-import { deleteProduct } from "../../../redux/slices/adminProductSlice";
+
 const ProductManagement = () => {
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector((state) => state.adminProducts);
-  
+  const { products, loading, error } = useSelector(
+    (state) => state.adminProducts
+  );
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [selectedProductName, setSelectedProductName] = useState("");
+
   useEffect(() => {
     dispatch(fetchAdminProducts());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete the product?")) {
-      dispatch(deleteProduct(id));
-      // Call your delete API here
+  const openDeleteModal = (id, name) => {
+    setSelectedProductId(id);
+    setSelectedProductName(name);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedProductId(null);
+    setSelectedProductName("");
+  };
+
+  const confirmDelete = async () => {
+    if (selectedProductId) {
+      await dispatch(deleteProduct(selectedProductId));
+      closeModal();
+      dispatch(fetchAdminProducts()); // Refetch products after delete
     }
   };
 
-  if(loading) return <p>Loading...</p>
-  if(error) return <p>Error: {error}</p>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
@@ -61,7 +82,7 @@ const ProductManagement = () => {
                       Edit
                     </Link>
                     <button
-                      onClick={() => handleDelete(product._id)}
+                      onClick={() => openDeleteModal(product._id, product.name)}
                       className="bg-red-300 text-black px-2 py-1 rounded mr-2 hover:bg-red-600"
                     >
                       Delete
@@ -79,6 +100,36 @@ const ProductManagement = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal for delete confirmation */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md text-center animate-fadeIn">
+            <h3 className="text-xl font-bold mb-4 text-red-600">
+              Delete Product
+            </h3>
+            <p className="mb-6 text-gray-700">
+              Are you sure you want to delete{" "}
+              <span className="font-semibold">{selectedProductName}</span>? This
+              action cannot be undone.
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700 font-semibold shadow"
+              >
+                Delete
+              </button>
+              <button
+                onClick={closeModal}
+                className="bg-gray-200 text-black px-6 py-2 rounded hover:bg-gray-300 font-semibold shadow"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
