@@ -9,6 +9,7 @@ import {
   FaStore,
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import logo from "../../assets/logo.png";
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
@@ -21,11 +22,10 @@ const AdminSidebar = () => {
   return (
     <div className="p-6 text-center">
       <div className="mb-10">
-        <Link to="/admin" className="text-2xl font-medium">
-          FlexStep
+        <Link to="/" className="text-2xl text-white font-medium">
+          <img src={logo} alt="" className="w-40 h-10" />
         </Link>
       </div>
-      <h2 className="text-xl font-medium mb-6 text-center">Admin Dashboard</h2>
       <nav className="flex flex-col space-y-2">
         <NavLink
           to="/admin/users"

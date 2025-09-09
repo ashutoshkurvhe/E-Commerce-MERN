@@ -4,27 +4,6 @@ import { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { deleteProduct } from "../../../redux/slices/adminProductSlice";
 const ProductManagement = () => {
-  // const products = [
-  //   {
-  //     _id: 124578,
-  //     name: "Product 1",
-  //     price: 100,
-  //     sku: "123456781234",
-  //   },
-  //   {
-  //     _id: 124579,
-  //     name: "Product 2",
-  //     price: 200,
-  //     sku: "123456781234",
-  //   },
-  //   {
-  //     _id: 124580,
-  //     name: "Product 3",
-  //     price: 300,
-  //     sku: "123456781234",
-  //   },
-  // ];
-
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.adminProducts);
   

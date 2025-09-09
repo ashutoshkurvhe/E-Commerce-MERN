@@ -47,11 +47,11 @@ const Register = () => {
   };
 
   return (
-    <div className="flex bg-white m-20 rounded-2xl shadow-lg overflow-hidden">
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12">
-        <form onSubmit={handleSubmit} className="w-full bg-white p-8">
+    <div className="flex bg-white m-5 md:m-20 rounded-2xl shadow-lg overflow-hidden">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-2 md:p-12">
+        <form onSubmit={handleSubmit} className="w-full bg-white p-2 md:p-8">
           <div className="flex justify-center mb-6">
-            <h2 className="text-xl font-medium">Fabrica</h2>
+            {/* <h2 className="text-xl font-medium">Fabrica</h2> */}
           </div>
           <h2 className="text-2xl font-bold text-center mb-6">Hey there!</h2>
           <p className="text-center mb-6">Enter your details to Register</p>
@@ -95,18 +95,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Role Selection */}
-          <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2">Role</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full p-2 border rounded"
-            >
-              <option value="customer">Customer</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
 
           {/* Submit */}
           <button
